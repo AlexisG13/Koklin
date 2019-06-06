@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "119073782527",
+    "firebase_url": "https://koklin-1558111987014.firebaseio.com",
+    "project_id": "koklin-1558111987014",
+    "storage_bucket": "koklin-1558111987014.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119073782527:android:9523c09696704958",
+        "android_client_info": {
+          "package_name": "com.bonobostudios.koklin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "119073782527-q8p3chrao225etp5pdjrhu554p6v717t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bonobostudios.koklin",
+            "certificate_hash": "a1cd90629e13e91b2635e43842ef225bd5e8063b"
+          }
+        },
+        {
+          "client_id": "119073782527-4ef0nntb07junivk4sm1cdjktiuieo57.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrzmTUxD7_4lE08nTUq3D7Tg98d0wHisk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "119073782527-4ef0nntb07junivk4sm1cdjktiuieo57.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
