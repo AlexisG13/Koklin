@@ -132,7 +132,8 @@
             android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/Comprension"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/BajaTV"/>
+            app:layout_constraintRight_toLeftOf="@id/BajaTV"
+            app:layout_constraintBottom_toTopOf="@id/CheckMedia"/>
     <TextView
             android:id="@+id/BajaTV"
             android:layout_width="wrap_content"
@@ -151,7 +152,8 @@
             android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/CheckBaja"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/MediaTV"/>
+            app:layout_constraintRight_toLeftOf="@id/MediaTV"
+            app:layout_constraintBottom_toTopOf="@id/CheckAlta"/>
     <TextView
             android:id="@+id/MediaTV"
             android:layout_width="wrap_content"
