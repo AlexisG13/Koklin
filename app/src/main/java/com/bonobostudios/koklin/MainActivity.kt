@@ -1,5 +1,6 @@
 package com.bonobostudios.koklin
 
+import android.content.Intent
 import android.nfc.Tag
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -34,6 +35,9 @@ class MainActivity : AppCompatActivity() {
                 "password" to password
             )
             db.collection("users").add(user)
+
+            val intent : Intent = Intent(this,Main2Activity::class.java)
+            startActivity(intent)
         }
 
     }
