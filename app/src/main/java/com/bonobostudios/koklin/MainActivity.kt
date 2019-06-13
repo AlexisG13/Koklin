@@ -15,11 +15,11 @@ class MainActivity : AppCompatActivity() {
 
     val db = FirebaseFirestore.getInstance()
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
 
         et4.setOnClickListener {
@@ -29,10 +29,13 @@ class MainActivity : AppCompatActivity() {
 
             var password = et3.text.toString()
 
+            var nivel = Pasty.text
+
             val user = hashMapOf(
                 "email" to mail,
                 "name" to nombre,
-                "password" to password
+                "password" to password,
+                "niveles" to nivel
             )
             db.collection("users").add(user)
 
