@@ -7,6 +7,109 @@
         android:layout_height="match_parent"
         tools:context=".activities.MainActivity">
 
+    <TextView
+            android:id="@+id/pregunta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pregunta"
+            android:textSize="30sp"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/validacionCosas"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/validacionCosas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/respuesta1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="#B9B8B8">
+        <TextView
+                android:id="@+id/lol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Intentos restantes: "
+                android:textSize="20sp"
+                android:layout_margin="10dp"
+                app:layout_constraintRight_toLeftOf="@id/IntentosRestantes"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+        <TextView
+                android:id="@+id/IntentosRestantes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3"
+                android:textSize="20sp"
+                android:layout_margin="10dp"
+                app:layout_constraintLeft_toRightOf="@id/lol"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <TextView
+            android:id="@+id/respuesta1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RESPUESTA 1"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:padding="30dp"
+            android:background="#FFF"
+            android:elevation="5dp"
+            app:layout_constraintTop_toBottomOf="@id/pregunta"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/respuesta2"
+            app:layout_constraintBottom_toTopOf="@id/respuesta3"/>
+    <TextView
+            android:id="@+id/respuesta2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RESPUESTA 2"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:padding="30dp"
+            android:background="#FFF"
+            android:elevation="5dp"
+            app:layout_constraintTop_toBottomOf="@id/pregunta"
+            app:layout_constraintLeft_toRightOf="@id/respuesta1"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/respuesta4"/>
+    <TextView
+            android:id="@+id/respuesta3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RESPUESTA 3"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:padding="30dp"
+            android:background="#FFF"
+            android:elevation="5dp"
+            app:layout_constraintTop_toBottomOf="@id/respuesta1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/respuesta4"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    <TextView
+            android:id="@+id/respuesta4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RESPUESTA 4"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:padding="30dp"
+            android:background="#FFF"
+            android:elevation="5dp"
+            app:layout_constraintTop_toBottomOf="@id/respuesta2"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/respuesta3"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 
