@@ -2,6 +2,7 @@ package com.bonobostudios.koklin.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.bonobostudios.koklin.R
 
 class HistoryActivity : AppCompatActivity() {
 
