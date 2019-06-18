@@ -4,6 +4,8 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
+import android.widget.Toast
 import com.bonobostudios.koklin.R
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -14,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     val TAG = ""
 
     val db = FirebaseFirestore.getInstance()
+    var intentos = 3
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val pReference = db.collection("nivel").document("L1")
                             .collection("preguntas").document("pregunta1")
-                        ReadAllAnswers(pReference)
+                        ReadAllAnswers(pReference, 1)
 
                     } else {
                         Log.w("WARNING!", "No se pudo encontrar nada que cargar.", task.exception)
@@ -40,8 +43,7 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
-    private fun ReadAllAnswers(reference: DocumentReference) {
-        var intentos = 3
+    private fun ReadAllAnswers(reference: DocumentReference, pActual: Int) {
         reference.get().addOnSuccessListener { document ->
             val pregunta = document.get("pregunta").toString()
             for (actual in 1..4) {
@@ -53,76 +55,52 @@ class MainActivity : AppCompatActivity() {
                     if (document != null) {
                         PreguntaID.setText(pregunta)
                         if ("respuesta$actual" == "respuesta1") {
-                            respuesta1.setText(respuesta)
-                            respuesta1.setOnClickListener {
-                                if (esCorrecta == "true") {
-                                    respuesta1.setBackgroundColor(Color.argb(255, 41, 181, 48))
-                                } else {
-                                    respuesta1.setBackgroundColor(Color.argb(255, 181, 41, 48))
-                                    intentos = intentos - 1
-                                    IntentosRestantes.setText(intentos.toString())
-                                    if (intentos == 0) {
-                                        PreguntaID.setText("GAME OVER")
-                                        if (esCorrecta == "true") {
-                                            respuesta1.setBackgroundColor(Color.argb(255, 41, 181, 48))
-                                        }
-                                    }
-                                }
-                            }
+                            loadThings(respuesta1,respuesta,esCorrecta,pActual)
                         } else if ("respuesta$actual" == "respuesta2") {
-                            respuesta2.setText(respuesta)
-                            respuesta2.setOnClickListener {
-                                if (esCorrecta == "true") {
-                                    respuesta2.setBackgroundColor(Color.argb(255, 41, 181, 48))
-                                } else {
-                                    respuesta2.setBackgroundColor(Color.argb(255, 181, 41, 48))
-                                    intentos = intentos - 1
-                                    IntentosRestantes.setText(intentos.toString())
-                                    if (intentos == 0) {
-                                        PreguntaID.setText("GAME OVER")
-                                        if (esCorrecta == "true") {
-                                            respuesta2.setBackgroundColor(Color.argb(255, 41, 181, 48))
-                                        }
-                                    }
-                                }
-                            }
+                            loadThings(respuesta2,respuesta,esCorrecta,pActual)
                         } else if ("respuesta$actual" == "respuesta3") {
-                            respuesta3.setText(respuesta)
-                            respuesta3.setOnClickListener {
-                                if (esCorrecta == "true") {
-                                    respuesta3.setBackgroundColor(Color.argb(255, 41, 181, 48))
-                                } else {
-                                    respuesta3.setBackgroundColor(Color.argb(255, 181, 41, 48))
-                                    intentos = intentos - 1
-                                    IntentosRestantes.setText(intentos.toString())
-                                    if (intentos == 0) {
-                                        PreguntaID.setText("GAME OVER")
-                                        if (esCorrecta == "true") {
-                                            respuesta3.setBackgroundColor(Color.argb(255, 41, 181, 48))
-                                        }
-                                    }
-                                }
-                            }
+                            loadThings(respuesta3,respuesta,esCorrecta,pActual)
                         } else if ("respuesta$actual" == "respuesta4") {
-                            respuesta4.setText(respuesta)
-                            respuesta4.setOnClickListener {
-                                if (esCorrecta == "true") {
-                                    respuesta4.setBackgroundColor(Color.argb(255, 41, 181, 48))
-                                } else {
-                                    respuesta4.setBackgroundColor(Color.argb(255, 181, 41, 48))
-                                    intentos = intentos - 1
-                                    IntentosRestantes.setText(intentos.toString())
-                                    if (intentos == 0) {
-                                        PreguntaID.setText("GAME OVER")
-                                        if (esCorrecta == "true") {
-                                            respuesta4.setBackgroundColor(Color.argb(255, 41, 181, 48))
-                                        }
-                                    }
-                                }
-                            }
+                            loadThings(respuesta4,respuesta,esCorrecta,pActual)
                         }
                     } else {
                         Log.w("ERROR!", "Algo pasó porque no estamos en vivo.")
+                    }
+                }
+                respuesta1.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                respuesta2.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                respuesta3.setBackgroundColor(Color.argb(0, 0, 0, 0))
+                respuesta4.setBackgroundColor(Color.argb(0, 0, 0, 0))
+            }
+        }
+    }
+
+    private fun loadThings(context : TextView, respuesta:String,esCorrecta:String,pActual: Int){
+        context.setText(respuesta)
+        context.setOnClickListener {
+            //var intentosDeX = intentos
+            if (esCorrecta == "true") {
+                var pNueva = pActual + 1
+                context.setBackgroundColor(Color.argb(255, 41, 181, 48))
+                val pReference = db.collection("nivel").document("L1")
+                    .collection("preguntas").document("pregunta$pNueva")
+                if (pNueva > 3) {
+                    Toast.makeText(this, "¡Has completado el nivel!", Toast.LENGTH_LONG).show()
+                } else {
+                    ReadAllAnswers(pReference, pNueva)
+                }
+            } else {
+                context.setBackgroundColor(Color.argb(255, 181, 41, 48))
+                //intentosDeX=intentosDeX-1
+                intentos--
+                if (intentos >= 0) {
+                    IntentosRestantes.setText(intentos.toString())
+                }
+                if (intentos == 0) {
+                    PreguntaID.setText("GAME OVER")
+                    Toast.makeText(this, "¡Perdiste!", Toast.LENGTH_LONG).show()
+                    if (esCorrecta == "true") {
+                        context.setBackgroundColor(Color.argb(255, 41, 181, 48))
                     }
                 }
             }
