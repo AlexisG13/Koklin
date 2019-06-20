@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,14 +7,37 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-    <Button android:layout_width="wrap_content"
+
+
+    <TextView
+            android:id="@+id/IDdecoration"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="EJERCICIOS"
+            android:paddingLeft="35dp"
+            android:background="#D1D1D1"
+            app:layout_constraintBottom_toTopOf="@id/CardRecyclerViewID"
+            app:layout_constraintTop_toTopOf="parent"/>
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/CardRecyclerViewID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/IDdecoration"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"></androidx.recyclerview.widget.RecyclerView>
+    <Button
             android:id="@+id/btn_sign_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LOG OUT"
+            android:textStyle="bold"
             android:enabled="false"
+            app:layout_constraintTop_toBottomOf="@id/CardRecyclerViewID"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-    />
 
 
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
