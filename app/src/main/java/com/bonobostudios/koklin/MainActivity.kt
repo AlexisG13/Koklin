@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     //Toast.makeText(this,user.email,Toast.LENGTH_SHORT).show()
                 }
-                btn_sign_out.isEnabled = true
+                //btn_sign_out.isEnabled = true
             }
         }
     }
