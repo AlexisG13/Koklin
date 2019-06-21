@@ -35,14 +35,17 @@ class MainActivity : AppCompatActivity() {
         )
 
         actionProfile.setOnClickListener {
-            actionProfile.setBackgroundColor(Color.argb(255,178,178,178))
             val intent : Intent = Intent(this,ProfileActivity::class.java)
             startActivity(intent)
         }
 
         actionSettings.setOnClickListener {
-            actionProfile.setBackgroundColor(Color.argb(255,178,178,178))
             val intent : Intent = Intent(this,SettingsActivity::class.java)
+            startActivity(intent)
+        }
+
+        StartANewTestIcon.setOnClickListener {
+            val intent : Intent = Intent(this,PatientInfoActivity::class.java)
             startActivity(intent)
         }
 
