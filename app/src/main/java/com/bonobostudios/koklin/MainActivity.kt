@@ -43,14 +43,6 @@ class MainActivity : AppCompatActivity() {
             AuthUI.IdpConfig.GoogleBuilder().build()
         )
 
-        btn_sign_out.setOnClickListener{
-            AuthUI.getInstance()
-                .signOut(this)
-                .addOnCompleteListener({
-                    btn_sign_out.isEnabled=false
-                    showSignInOptions()
-                })
-        }
 
         showSignInOptions()
     }
