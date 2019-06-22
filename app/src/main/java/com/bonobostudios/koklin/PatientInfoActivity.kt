@@ -12,7 +12,7 @@ class PatientInfoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_patient_info)
 
         BtnAceptar.setOnClickListener{
-            val intent : Intent = Intent(this,SettingsActivity::class.java)
+            val intent : Intent = Intent(this,TestActivity::class.java)
             startActivity(intent)
         }
         BtnCancelar.setOnClickListener{
