@@ -5,6 +5,8 @@ import android.os.Parcelable
 
 data class paciente(
     val Nombre:String ="N/A"
+
+
 ) : Parcelable{
     constructor(parcel: Parcel): this(
         Nombre=parcel.readString()
