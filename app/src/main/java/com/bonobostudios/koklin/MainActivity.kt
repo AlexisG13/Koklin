@@ -39,13 +39,12 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     val rootRef = FirebaseFirestore.getInstance()
-
+    private  var adapter : PacienteAdapterFirestore? = null
     val db = FirebaseFirestore.getInstance()
     private val REQUEST_CODE = 2019
     val auth = FirebaseAuth.getInstance()
-    val query = rootRef.collection("pacientes ")
-    val options = FirestoreRecyclerOptions.Builder<paciente>().setQuery(query,paciente::class.java).build()
-    private var adapter= PacienteAdapterFirestore(options)
+
+
 
     lateinit var providers : List<AuthUI.IdpConfig>
     private var pacienteList:ArrayList<paciente> = ArrayList()
@@ -55,12 +54,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.bonobostudios.koklin.R.layout.activity_main)
+        setContentView(R.layout.activity_main)
 
         rvPacientes.layoutManager=LinearLayoutManager(this)
 
 
-        rvPacientes.adapter=adapter
+
+
 
         providers = Arrays.asList(
             AuthUI.IdpConfig.EmailBuilder().build(),
@@ -74,9 +74,14 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+
     override fun onStart() {
         super.onStart()
-        adapter!!.startListening()
+        if (adapter!=null){
+            adapter!!.startListening()
+        }
+
     }
 
     override fun onStop() {
@@ -110,6 +115,13 @@ class MainActivity : AppCompatActivity() {
             if(resultCode== Activity.RESULT_OK){
                 var user = FirebaseAuth.getInstance().currentUser
                 if (user != null) {
+
+                    val query = rootRef.collection("pacientes ").whereEqualTo("user",usuario(user))
+                    val options = FirestoreRecyclerOptions.Builder<paciente>().setQuery(query,paciente::class.java).build()
+                    adapter= PacienteAdapterFirestore(options)
+                    rvPacientes.adapter=adapter
+
+
 
                     if(!user.isEmailVerified){
                         userExists(user)
@@ -147,6 +159,9 @@ class MainActivity : AppCompatActivity() {
                 db.collection("users").document(user.uid).set(userh)
             }
             else {
+
+                adapter!!.startListening()
+
                 Toast.makeText(this,"Ya existe"+user.uid,Toast.LENGTH_SHORT).show()
                 var kk = db.collection("pacientes ").whereEqualTo("user",user.uid).get()
                 kk.addOnSuccessListener { documents->
