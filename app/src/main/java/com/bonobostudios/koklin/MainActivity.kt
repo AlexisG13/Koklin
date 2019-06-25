@@ -122,11 +122,14 @@ class MainActivity : AppCompatActivity() {
                 adapter!!.startListening()
 
                 Toast.makeText(this,"Ya existe"+user.uid,Toast.LENGTH_SHORT).show()
-                var kk = db.collection("partida").whereEqualTo("user",user.uid).get()
+                var kk = db.collection("pacientes ").whereEqualTo("user",user.uid).get()
+
+
                 kk.addOnSuccessListener { documents->
                     for(document in documents){
                         Log.d("TORTY","${document.data}")
                     }
+                    NumeroDePacientes.setText(documents.size().toString())
                 }
             }
             }
