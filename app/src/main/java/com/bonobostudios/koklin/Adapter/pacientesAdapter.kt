@@ -1,36 +1,42 @@
 package com.bonobostudios.koklin.Adapter
 
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bonobostudios.koklin.POJOS.paciente
 import com.bonobostudios.koklin.R
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import kotlinx.android.synthetic.main.pacientes_cardview.view.*
+/*
 
-class pacientesAdapter (var pacientes : List<paciente>,val clickListener:(paciente)->Unit):RecyclerView.Adapter<pacientesAdapter.ViewHolder>(){
 
+class pacientesAdapter (options : FirestoreRecyclerOptions<paciente>): FirestoreRecyclerAdapter<paciente,pacientesAdapter.ViewHolder>(options){
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, model: paciente) {
+        holder.bind(model)
+    }
+    private val TAG: String = "Adapter"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.pacientes_cardview,parent,false)
-        return ViewHolder(view)
+        return ViewHolder(LayoutInflater.from(parent.getContext())
+            .inflate(R.layout.activity_main, parent, false));
     }
-    override fun onBindViewHolder(holder: ViewHolder, position: Int)= holder.bind(pacientes[position],clickListener)
-
-
-    override fun getItemCount() = pacientes.size
-
-    fun changeList(pacientes:List<paciente>){
-        this.pacientes = pacientes
-        notifyDataSetChanged()
+    override fun onDataChanged() {
+        super.onDataChanged()
+        Log.v(TAG, "onDataChanged")
     }
 
-    class ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
-        fun bind(item: paciente,clickListener: (paciente) -> Unit)=with(itemView){
-            tv_nombrePaciente.text=item.Nombre
-            this.setOnClickListener { clickListener(item) }
-        }
+class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    fun bind(model: paciente){
+        itemView.tv_nombrePaciente.text=model.getName()
+
     }
+}
+
 
 }
+*/

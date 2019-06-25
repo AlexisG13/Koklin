@@ -7,14 +7,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bonobostudios.koklin.Adapter.pacientesAdapter
+//import com.bonobostudios.koklin.Adapter.pacientesAdapter
 import com.bonobostudios.koklin.POJOS.paciente
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.pacientes_activity.*
 import org.json.JSONObject
-
+/*
 class pacientesActivity: AppCompatActivity(){
 
     private lateinit var  pacienteAdapter : pacientesAdapter
@@ -31,7 +31,6 @@ class pacientesActivity: AppCompatActivity(){
         setContentView(R.layout.pacientes_activity)
 
 
-        initRecyclerView()
         userExists(user!!)
 
 
@@ -39,10 +38,6 @@ class pacientesActivity: AppCompatActivity(){
     }
 
 
-    fun addPacienteTList(aciente:paciente){
-        pacienteList.add(aciente)
-        pacienteAdapter.changeList(pacienteList)
-    }
 
     fun userExists(user: FirebaseUser){
         val docIdRef = db.collection("users").document(user.uid)
@@ -63,7 +58,7 @@ class pacientesActivity: AppCompatActivity(){
                         Log.d("TORTY","${document.data}")
 
                         var pasty= document.toObject(paciente::class.java)
-                        addPacienteTList(pasty)
+
 
                     }
                 }
@@ -72,23 +67,8 @@ class pacientesActivity: AppCompatActivity(){
         docIdRef.get()
     }
 
-    fun initRecyclerView(){
-        viewManager = LinearLayoutManager(this)
-        pacienteAdapter = pacientesAdapter(pacienteList,{pacienteIte: paciente-> pacienteIteClicked(pacienteIte)})
 
-        rv_pacientes.apply {
-            setHasFixedSize(true)
-            layoutManager = viewManager
-            adapter = pacienteAdapter
-        }
 
-    }
-
-    private fun pacienteIteClicked (item: paciente){
-        val pacienteBundle=Bundle()
-        pacienteBundle.putParcelable("PACIENTE",item)
-        //
-    }
 
 
 
@@ -97,3 +77,5 @@ class pacientesActivity: AppCompatActivity(){
 
 
 }
+
+        */
