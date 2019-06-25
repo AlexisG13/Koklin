@@ -6,154 +6,115 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/LayoutTop"
+            android:id="@+id/PacientesConstraint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:background="#ECEBEB"
-            app:layout_constraintBottom_toTopOf="@id/LinearLayoutDeSeparacion"
-            app:layout_constraintTop_toTopOf="parent">
-        <TextView
-                android:id="@+id/LayoutPacientes"
-                android:layout_width="330dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/ResultadosConstraint">
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/LayoutTop"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Pacientes"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/NumeroDePacientes"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
-        <TextView
-                android:id="@+id/NumeroDePacientes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="255"
-                android:padding="8dp"
-                android:textColor="#FFF"
-                android:background="@drawable/paciente_layout"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/LayoutPacientes"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                android:padding="5dp"
+                android:background="#ECEBEB"
+                app:layout_constraintBottom_toTopOf="@id/LinearLayoutDeSeparacion"
+                app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                    android:id="@+id/LayoutPacientes"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:text="Pacientes"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="10dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/NumeroDePacientes"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+            <TextView
+                    android:id="@+id/NumeroDePacientes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="255"
+                    android:padding="8dp"
+                    android:textColor="#FFF"
+                    android:background="@drawable/paciente_layout"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/LayoutPacientes"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+                android:id="@+id/LinearLayoutDeSeparacion"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#B9B9B9"
+                app:layout_constraintTop_toBottomOf="@id/LayoutTop"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:orientation="vertical"></LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPacientes"
+                android:layout_width="350dp"
+                android:layout_height="170dp"
+                android:layout_margin="20dp"
+                android:padding="5dp"
+                android:background="@drawable/border_layout"
+                android:elevation="5dp"
+                app:layout_constraintTop_toBottomOf="@id/LinearLayoutDeSeparacion"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"></androidx.recyclerview.widget.RecyclerView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <LinearLayout
-            android:id="@+id/LinearLayoutDeSeparacion"
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="#B9B9B9"
-            app:layout_constraintTop_toBottomOf="@id/LayoutTop"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:orientation="vertical"></LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvPacientes"
-            android:layout_width="350dp"
-            android:layout_height="170dp"
-            android:layout_margin="20dp"
-            android:padding="5dp"
-            android:background="@drawable/border_layout"
-            android:elevation="5dp"
-            app:layout_constraintTop_toBottomOf="@id/LinearLayoutDeSeparacion"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/LayoutBottom"></androidx.recyclerview.widget.RecyclerView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/LayoutBottom"
+            android:id="@+id/ResultadosConstraint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="#ECEBEB"
-            android:layout_marginTop="40dp"
-            app:layout_constraintTop_toBottomOf="@id/rvPacientes">
-        <TextView
-                android:id="@+id/LayoutResultados"
-                android:layout_width="330dp"
+            app:layout_constraintTop_toBottomOf="@id/PacientesConstraint"
+            app:layout_constraintBottom_toTopOf="@id/StartANewTestIcon">
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/LayoutTop1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Resultados"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                android:padding="5dp"
+                android:background="#ECEBEB"
+                app:layout_constraintBottom_toTopOf="@id/LinearLayoutDeSeparacion1"
+                app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                    android:id="@+id/LayoutPacientes1"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:text="Resultados"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="10dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+                android:id="@+id/LinearLayoutDeSeparacion1"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#B9B9B9"
+                app:layout_constraintTop_toBottomOf="@id/LayoutTop1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:orientation="vertical"></LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvResultados"
+                android:layout_width="350dp"
+                android:layout_height="170dp"
+                android:layout_margin="20dp"
+                android:padding="5dp"
+                android:background="@drawable/border_layout"
+                android:elevation="5dp"
+                app:layout_constraintTop_toBottomOf="@id/LinearLayoutDeSeparacion1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"></androidx.recyclerview.widget.RecyclerView>
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <LinearLayout
-            android:id="@+id/LinearLayoutDeSeparacion2"
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="#B9B9B9"
-            app:layout_constraintTop_toBottomOf="@id/LayoutBottom"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:orientation="vertical"></LinearLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/Resultados"
-            android:layout_width="350dp"
-            android:layout_height="170dp"
-            android:layout_margin="20dp"
-            android:padding="5dp"
-            android:background="@drawable/border_layout"
-            android:elevation="5dp"
-            app:layout_constraintTop_toBottomOf="@id/LinearLayoutDeSeparacion2"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
 
-        <TextView
-                android:id="@+id/Param1"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="Parámetro 1:"
-                android:textStyle="bold"
-                android:layout_marginLeft="40dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/Param2"/>
-        <TextView
-                android:id="@+id/Param2"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="Parámetro 2:"
-                android:textStyle="bold"
-                android:layout_marginLeft="40dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/Param1"
-                app:layout_constraintBottom_toTopOf="@id/Param3"/>
-        <TextView
-                android:id="@+id/Param3"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="Parámetro 3:"
-                android:textStyle="bold"
-                android:layout_marginLeft="40dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/Param2"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-        <TextView
-                android:id="@+id/ResultsP1"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="73%"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/ResultsP2"
-                app:layout_constraintLeft_toRightOf="@id/Param1"
-                app:layout_constraintRight_toRightOf="parent"/>
-        <TextView
-                android:id="@+id/ResultsP2"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="20%"
-                app:layout_constraintTop_toBottomOf="@id/ResultsP1"
-                app:layout_constraintBottom_toTopOf="@id/ResultsP3"
-                app:layout_constraintLeft_toRightOf="@id/Param2"
-                app:layout_constraintRight_toRightOf="parent"/>
-        <TextView
-                android:id="@+id/ResultsP3"
-                android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="7%"
-                app:layout_constraintTop_toBottomOf="@id/ResultsP2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/Param3"
-                app:layout_constraintRight_toRightOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/NavigationBar"
             android:layout_width="match_parent"
