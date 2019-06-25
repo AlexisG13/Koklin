@@ -7,8 +7,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bonobostudios.POJOS.paciente
+import com.bonobostudios.koklin.Adapter.PacienteAdapterFirestore
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -18,6 +22,8 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    val rootRef = FirebaseFirestore.getInstance()
+    private  var adapter : PacienteAdapterFirestore? = null
 
     val db = FirebaseFirestore.getInstance()
     private val REQUEST_CODE = 2019
@@ -28,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        rvPacientes.layoutManager= LinearLayoutManager(this)
         providers = Arrays.asList(
             AuthUI.IdpConfig.EmailBuilder().build(),
             AuthUI.IdpConfig.GoogleBuilder().build()
@@ -51,7 +57,13 @@ class MainActivity : AppCompatActivity() {
 
         showSignInOptions()
     }
+    override fun onStop() {
+        super.onStop()
 
+        if (adapter != null) {
+            adapter!!.stopListening()
+        }
+    }
     fun showSignInOptions(){
         startActivityForResult(AuthUI.getInstance()
             .createSignInIntentBuilder()
@@ -66,6 +78,11 @@ class MainActivity : AppCompatActivity() {
             var response = IdpResponse.fromResultIntent(data)
             if(resultCode== Activity.RESULT_OK){
                 var user = FirebaseAuth.getInstance().currentUser
+                val query = rootRef.collection("pacientes ").whereEqualTo("user",usuario(user))
+                val options = FirestoreRecyclerOptions.Builder<paciente>().setQuery(query, paciente::class.java).build()
+                adapter= PacienteAdapterFirestore(options)
+                rvPacientes.adapter=adapter
+
                 if (user != null) {
                     if(!user.isEmailVerified){
                         userExists(user)
@@ -80,6 +97,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    fun usuario(user : FirebaseUser):String{
+        return user.uid
     }
 
     fun verCorreo(user: FirebaseUser){
@@ -98,6 +119,8 @@ class MainActivity : AppCompatActivity() {
                 db.collection("users").document(user.uid).set(userh)
             }
             else {
+                adapter!!.startListening()
+
                 Toast.makeText(this,"Ya existe"+user.uid,Toast.LENGTH_SHORT).show()
                 var kk = db.collection("partida").whereEqualTo("user",user.uid).get()
                 kk.addOnSuccessListener { documents->
