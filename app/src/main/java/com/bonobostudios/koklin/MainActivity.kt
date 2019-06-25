@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             var response = IdpResponse.fromResultIntent(data)
             if(resultCode== Activity.RESULT_OK){
                 var user = FirebaseAuth.getInstance().currentUser
-                val query = rootRef.collection("pacientes ").whereEqualTo("user",usuario(user))
+                val query = rootRef.collection("pacientes ").whereEqualTo("user",usuario(user!!))
                 val options = FirestoreRecyclerOptions.Builder<paciente>().setQuery(query, paciente::class.java).build()
                 adapter= PacienteAdapterFirestore(options)
                 rvPacientes.adapter=adapter
