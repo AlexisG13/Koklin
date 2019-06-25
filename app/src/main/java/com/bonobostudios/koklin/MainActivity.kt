@@ -21,6 +21,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bonobostudios.koklin.Adapter.PacienteAdapterFirestore
 import com.bonobostudios.koklin.POJOS.paciente
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
@@ -50,26 +51,6 @@ class MainActivity : AppCompatActivity() {
     private var pacienteList:ArrayList<paciente> = ArrayList()
 //    val options = FirestoreRecyclerOptions.Builder<ProductModel>().setQuery(query, ProductModel::class.java).build()
 
-private inner class pacienteViewHolder internal constructor(private val view: View) : RecyclerView.ViewHolder(view){
-    internal fun setPacienteName(pacienteName:String){
-        val textView = view.findViewById<TextView>(R.id.tv_nombrePaciente)
-        textView.text=pacienteName
-    }
-
-}
-
-    private inner class PacienteAdapterFirestore internal constructor(options: FirestoreRecyclerOptions<paciente>) : FirestoreRecyclerAdapter<paciente, pacienteViewHolder>(options){
-
-        override fun onBindViewHolder(holder: pacienteViewHolder, position: Int, PA: paciente) {
-holder.setPacienteName(PA.nombre)
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): pacienteViewHolder {
-          val view=LayoutInflater.from(parent.context).inflate(R.layout.pacientes_cardview,parent,false)
-            return pacienteViewHolder(view)
-        }
-
-    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
