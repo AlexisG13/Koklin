@@ -149,6 +149,9 @@ class MainActivity : AppCompatActivity(),PacienteAdapter.OnPacienteSelectedListe
     override fun onEvaluacionSelected(evaluacion: DocumentSnapshot){
         Toast.makeText(this,"SIUUUUUUU",Toast.LENGTH_SHORT).show()
 
+        val intent : Intent = Intent(this,TestActivity::class.java)
+        startActivity(intent)
+
     }
     fun showSignInOptions(){
         startActivityForResult(AuthUI.getInstance()

@@ -7,6 +7,8 @@
         android:layout_height="match_parent"
         tools:context=".TestActivity">
     <TextView
+
+            android:id="@+id/tv_fechaEVA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hello Test!"
@@ -15,5 +17,20 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
+    <TextView
+            android:text="NivelAU"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp" tools:layout_editor_absoluteY="185dp"
+            tools:layout_editor_absoluteX="176dp" android:id="@+id/tv_nivelAU"/>
+    <TextView
+            android:text="Respuestas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" tools:layout_editor_absoluteY="513dp"
+            tools:layout_editor_absoluteX="176dp" android:id="@+id/tv_NRespuestas"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" tools:layout_editor_absoluteY="79dp"
+            tools:layout_editor_absoluteX="176dp" android:id="@+id/tv_AUTOREVA"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
