@@ -2,28 +2,33 @@ package com.bonobostudios.koklin
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bonobostudios.Adapter.PacienteAdapter
+
 import com.bonobostudios.POJOS.paciente
-import com.bonobostudios.koklin.Adapter.PacienteAdapterFirestore
+
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),PacienteAdapter.OnPacienteSelectedListener {
 
     val rootRef = FirebaseFirestore.getInstance()
-    private  var adapter : PacienteAdapterFirestore? = null
+    lateinit var query: Query
+    lateinit var adapter: PacienteAdapter
+
+    //private var evaAdapter : evaluacionAdapter?=null
 
     val db = FirebaseFirestore.getInstance()
     private val REQUEST_CODE = 2019
@@ -34,11 +39,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        rvPacientes.layoutManager= LinearLayoutManager(this)
+
         providers = Arrays.asList(
             AuthUI.IdpConfig.EmailBuilder().build(),
             AuthUI.IdpConfig.GoogleBuilder().build()
         )
+
+//get pacientes
+
 
         actionProfile.setOnClickListener {
             val intent : Intent = Intent(this,ProfileActivity::class.java)
@@ -57,13 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         showSignInOptions()
     }
-    override fun onStop() {
-        super.onStop()
 
-        if (adapter != null) {
-            adapter!!.stopListening()
-        }
-    }
     fun showSignInOptions(){
         startActivityForResult(AuthUI.getInstance()
             .createSignInIntentBuilder()
@@ -80,8 +82,9 @@ class MainActivity : AppCompatActivity() {
                 var user = FirebaseAuth.getInstance().currentUser
                 val query = rootRef.collection("pacientes ").whereEqualTo("user",usuario(user!!))
                 val options = FirestoreRecyclerOptions.Builder<paciente>().setQuery(query, paciente::class.java).build()
-                adapter= PacienteAdapterFirestore(options)
-                rvPacientes.adapter=adapter
+
+
+
 
                 if (user != null) {
                     if(!user.isEmailVerified){
@@ -103,6 +106,13 @@ class MainActivity : AppCompatActivity() {
         return user.uid
     }
 
+
+
+
+
+
+
+
     fun verCorreo(user: FirebaseUser){
         user.sendEmailVerification()
     }
@@ -119,7 +129,9 @@ class MainActivity : AppCompatActivity() {
                 db.collection("users").document(user.uid).set(userh)
             }
             else {
-                adapter!!.startListening()
+
+
+
 
                 Toast.makeText(this,"Ya existe"+user.uid,Toast.LENGTH_SHORT).show()
                 var kk = db.collection("pacientes ").whereEqualTo("user",user.uid).get()
