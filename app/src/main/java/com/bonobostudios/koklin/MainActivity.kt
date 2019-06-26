@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(AuthUI.getInstance()
             .createSignInIntentBuilder()
             .setAvailableProviders(providers)
-            .setLogo(R.mipmap.ic_banner)
+            .setLogo(R.drawable.koklin_banner)
             .build(),REQUEST_CODE)
     }
 
