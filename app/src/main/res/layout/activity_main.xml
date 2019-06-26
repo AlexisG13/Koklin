@@ -35,8 +35,8 @@
             <EditText
                     android:id="@+id/ET_search"
                     android:layout_width="150dp"
+                    android:imeOptions="flagNoExtractUi"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
                     android:layout_marginLeft="20dp"
                     app:layout_constraintLeft_toRightOf="@id/LayoutPacientes"
                     app:layout_constraintRight_toLeftOf="@id/IB_button"
@@ -170,7 +170,8 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:background="#B9B9B9"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+    >
         <LinearLayout
                 android:id="@+id/actionProfile"
                 android:layout_width="165dp"
@@ -212,6 +213,7 @@
             android:src="@drawable/ic_plus_icon"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/ResultadosConstraint"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -47,14 +47,6 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
         query = rootRef.collection("pacientes ").whereEqualTo("user", FirebaseAuth.getInstance().currentUser?.uid)
 
 
-
-
-        /*IB_button.setOnClickListener {
-            var busqueda= ET_search.text.toString()
-            query3=rootRef.collection("pacientes ").whereEqualTo("nombre",busqueda)
-            adapter.setQuery(query3)
-        }*/
-
         ET_search.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
