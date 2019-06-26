@@ -39,40 +39,10 @@
             android:textSize="20sp"
             android:padding="5dp"
             app:layout_constraintTop_toBottomOf="@id/NombreEspecialista"
-            app:layout_constraintBottom_toTopOf="@id/MensajeFirma"/>
-    <ImageView
-            android:id="@+id/editarO"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_edit_black_24dp"
-            android:padding="5dp"
-            android:layout_marginLeft="40dp"
-            app:layout_constraintTop_toBottomOf="@id/MensajeFirma"
-            app:layout_constraintRight_toLeftOf="@id/EditarFirma"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/btn_sign_out"/>
-    <TextView
-            android:id="@+id/EditarFirma"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Editar Firma"
-            android:padding="5dp"
-            android:gravity="center"
-            app:layout_constraintTop_toBottomOf="@id/MensajeFirma"
-            app:layout_constraintLeft_toRightOf="@id/editarO"
-            app:layout_constraintBottom_toTopOf="@id/btn_sign_out"     />
-    <TextView
-            android:id="@+id/MensajeFirma"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="20dp"
-            android:background="@drawable/border_layout"
-            android:text="Obdulio Guardado | Lic. en Ciencias de la Computación"
-            app:layout_constraintTop_toBottomOf="@id/CargoEspecialista"
-            app:layout_constraintBottom_toTopOf="@id/btn_sign_out" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"/>
+    />
+
+
+
     <Button
             android:id="@+id/btn_sign_out"
             android:layout_width="wrap_content"
