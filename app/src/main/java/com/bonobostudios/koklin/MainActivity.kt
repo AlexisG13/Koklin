@@ -39,11 +39,7 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var mintent = intent
-
-        var usuario = mintent.getStringExtra("USER_ID")
-
-        query = rootRef.collection("pacientes ").whereEqualTo("user", usuario)
+        query = rootRef.collection("pacientes ").whereEqualTo("user", FirebaseAuth.getInstance().currentUser?.uid)
 
 //ADAPTER
         adapter = object : PacienteAdapter(query, this@MainActivity) {
