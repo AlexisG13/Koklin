@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,9 +15,12 @@ import com.bonobostudios.POJOS.paciente
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -46,7 +50,31 @@ class MainActivity : AppCompatActivity(),PacienteAdapter.OnPacienteSelectedListe
         )
 
 //get pacientes
+        query= rootRef.collection("pacientes ").whereEqualTo("user","EXyDrJaUolaKgFREAWehl82V9vu2")
 
+
+        //Adapter
+
+        adapter=object : PacienteAdapter(query,this@MainActivity){
+            override fun onDataChanged() {
+                if(itemCount==0){
+                    rvPacientes.visibility= View.GONE
+                    //viewEmpty.visibility = View.VISIBLE
+
+                }else{
+                    rvPacientes.visibility=View.VISIBLE
+                }
+
+            }
+            override fun onError(e: FirebaseFirestoreException) {
+                // Show a snackbar on errors
+                Snackbar.make(findViewById(android.R.id.content),
+                    "Error: check logs for info.", Snackbar.LENGTH_LONG).show()
+            }
+        }
+
+        rvPacientes.layoutManager=LinearLayoutManager(this)
+        rvPacientes.adapter=adapter
 
         actionProfile.setOnClickListener {
             val intent : Intent = Intent(this,ProfileActivity::class.java)
@@ -65,7 +93,21 @@ class MainActivity : AppCompatActivity(),PacienteAdapter.OnPacienteSelectedListe
 
         showSignInOptions()
     }
+    public override fun onStart() {
+        super.onStart()
 
+        // Start listening for Firestore updates
+        adapter.startListening()
+    }
+
+    public override fun onStop() {
+        super.onStop()
+        adapter.stopListening()
+    }
+
+    override fun onPacienteSelected(paciente: DocumentSnapshot) {
+        Toast.makeText(this,"SIUUUUUUU",Toast.LENGTH_SHORT).show()
+    }
     fun showSignInOptions(){
         startActivityForResult(AuthUI.getInstance()
             .createSignInIntentBuilder()
