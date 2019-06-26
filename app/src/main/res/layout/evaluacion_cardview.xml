@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                                   android:orientation="vertical"
-                                   android:layout_width="match_parent"
-                                   android:layout_height="match_parent">
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:id="@+id/tv_numeroRespuestas"
-                  android:text="Hola"
-                  android:background="#65000000"
+                  android:id="@+id/tv_nombrePaciente"
+                  android:text="Evaluación 1"
+                  android:background="#8BC34A"
                   android:lines="1"
+                  android:textStyle="bold"
                   android:padding="8dp"
-                  android:textColor="#fff"
-                  android:textSize="25sp"
+                  android:textColor="#FFF"
+                  android:textSize="20sp"
                   android:layout_margin="16dp"
-
-
-        />
-
-
+                  android:gravity="center"
+                  android:elevation="3dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:id="@+id/tv_numeroPaciente"
+                  android:text="9/11/01"
+                  android:background="#37723A"
+                  android:lines="1"
+                  android:padding="10dp"
+                  android:textColor="#FFEB3B"
+                  android:textSize="20sp"
+                  android:layout_margin="16dp"
+                  android:gravity="center"
+                  android:elevation="5dp"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

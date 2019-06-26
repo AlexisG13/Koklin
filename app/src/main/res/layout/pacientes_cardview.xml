@@ -15,6 +15,7 @@
                   android:textSize="25sp"
                   android:layout_margin="16dp"
                   android:gravity="center"
+                  android:elevation="3dp"
 
         />
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -22,10 +23,11 @@
                   android:text="#"
                   android:background="#659C9A9A"
                   android:lines="1"
-                  android:padding="8dp"
+                  android:padding="12dp"
                   android:textColor="#009104"
                   android:textSize="25sp"
                   android:layout_margin="16dp"
+                  android:elevation="5dp"
                   android:gravity="center"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
