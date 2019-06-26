@@ -15,9 +15,7 @@
                   android:textSize="25sp"
                   android:layout_margin="16dp"
                   android:gravity="center"
-                  android:elevation="3dp"
-
-        />
+                  android:elevation="3dp"/>
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:id="@+id/tv_numeroPaciente"
                   android:text="#"
