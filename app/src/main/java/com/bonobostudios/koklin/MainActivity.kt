@@ -55,7 +55,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        showSignInOptions()
+        if(auth.currentUser==null){
+            showSignInOptions()
+        }
     }
     override fun onStop() {
         super.onStop()

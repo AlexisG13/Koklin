@@ -125,6 +125,7 @@ class ExerciseFragment : Fragment(){
             Handler().postDelayed({
                 xxx.nActual+=1
                 if(xxx.nActual==3){
+                    xxx.insertEva()
                     var mIntent = Intent(activity,MainActivity::class.java)
                     startActivity(mIntent)
                 }

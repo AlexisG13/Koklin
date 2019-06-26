@@ -2,12 +2,18 @@ package com.bonobostudios.koklin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.firebase.firestore.FirebaseFirestore
 
 class TestActivity : AppCompatActivity()  {
 
+
+    var namePac : String ="N/A"
+    var mIntent = intent
+    // var paciente = mIntent.getStringExtra("paciente")
+    var paciente = "rJC3LJi56SN7kbC25Wph"
     val db = FirebaseFirestore.getInstance()
     var nPreguntas = 0
     var sIndex : Int = 0
@@ -44,5 +50,19 @@ class TestActivity : AppCompatActivity()  {
         changeFragment(resource,mainFragment)
     }
 
+    fun insertEva(){
+        val pacRef = db.collection("pacientes ").document(paciente)
+        pacRef.get().addOnSuccessListener { document->
+            if(document!=null){
+                namePac = document.getString("nombre")!!
+                val mEv = hashMapOf(
+                    "paciente" to namePac,
+                    "score" to nPreguntas
+                )
+                db.collection("evaluaciones ").add(mEv)
+            }
+        }
+        pacRef.get()
+    }
 
 }
