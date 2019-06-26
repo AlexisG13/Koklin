@@ -22,6 +22,10 @@
                 android:configChanges="orientation|keyboardHidden|screenSize">
         </activity>
         <activity
+                android:name=".EvDetailActivity"
+                android:configChanges="orientation|keyboardHidden|screenSize">
+        </activity>
+        <activity
                 android:name=".PatientInfoActivity"
                 android:configChanges="orientation|keyboardHidden|screenSize">
         </activity>

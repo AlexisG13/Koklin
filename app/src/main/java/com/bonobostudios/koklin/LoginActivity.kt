@@ -72,6 +72,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun userExists(user: FirebaseUser){
+        var mIntent = Intent(this,MainActivity::class.java)
         val docIdRef = db.collection("users").document(user.uid)
         docIdRef.get().addOnSuccessListener {document->
             if(!document.exists()){
@@ -81,13 +82,14 @@ class LoginActivity : AppCompatActivity() {
                     "name" to user.displayName
                 )
                 db.collection("users").document(user.uid).set(userh)
+
             }
             else {
                 Toast.makeText(this,"Ya existe"+user.uid, Toast.LENGTH_SHORT).show()
             }
         }
         docIdRef.get()
-        var mIntent = Intent(this,MainActivity::class.java)
+        mIntent.putExtra("USER_ID",user.uid)
         startActivity(mIntent)
     }
 }
