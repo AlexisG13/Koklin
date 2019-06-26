@@ -42,8 +42,14 @@ class TestActivity : AppCompatActivity()  {
     }
 
     fun changeFragment(id: Int, frag: Fragment){
-        supportFragmentManager.beginTransaction().replace(id, frag).commit() }
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right)
+            .replace(id, frag)
+            .commit() }
 
+    fun deleteFragment(frag: Fragment){
+        supportFragmentManager.beginTransaction().remove(frag).commit()
+    }
 
     fun initMainFragment(){
         mainFragment = ExerciseFragment.newInstance(getSonido())

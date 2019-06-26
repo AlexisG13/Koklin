@@ -20,6 +20,7 @@ class ProfileActivity : AppCompatActivity() {
                 .signOut(this)
                 .addOnCompleteListener {
                     var mIntent = Intent(this,LoginActivity::class.java)
+                    mIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(mIntent)
                     finish()
                 }

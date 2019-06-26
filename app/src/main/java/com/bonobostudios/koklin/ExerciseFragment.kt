@@ -129,7 +129,9 @@ class ExerciseFragment : Fragment(){
                     var mIntent = Intent(activity,MainActivity::class.java)
                     startActivity(mIntent)
                 }
-                else  xxx.initMainFragment()
+                else  {
+                    xxx.deleteFragment(this)
+                    xxx.initMainFragment()}
             },200)
         }
     }
