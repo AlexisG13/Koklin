@@ -14,9 +14,10 @@ class EvDetailActivity : AppCompatActivity() {
         setContentView(R.layout.respuestas_activity)
 
         var intent= intent
-        var usuario = intent.getStringExtra("USER_ID")
+        //var usuario = intent.getStringExtra("USER_ID")
+        var paciente = intent.getStringExtra("EVALUACION_ID")
 
-        read(usuario)
+        read(paciente)
     }
 
     fun read(id:String){

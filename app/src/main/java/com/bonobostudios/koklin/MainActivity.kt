@@ -132,7 +132,11 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
         adapter2.startListening()
 
         Toast.makeText(this, referenciaPaciente, Toast.LENGTH_SHORT).show()
-
+        NuevoTestPacienteCreado.visibility = View.VISIBLE
+        NuevoTestPacienteCreado.setOnClickListener {
+            val intent: Intent = Intent(this, TestActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
@@ -140,6 +144,7 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
         Toast.makeText(this, "SIUUUUUUU", Toast.LENGTH_SHORT).show()
 
         val intent: Intent = Intent(this, EvDetailActivity::class.java)
+        var pacienteID = intent.putExtra("EVALUACION_ID",evaluacion.id)
         startActivity(intent)
 
     }

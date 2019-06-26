@@ -41,6 +41,8 @@ open class EvaluacionAdapter (query: Query, private val listener: OnEvaluacionSe
            // itemView.tv_fecha.text=evaluacion.FECHA
             itemView.tv_numeroRespuestas.text=evaluacion.NRespuestas
 
+            itemView.fechaEvaluacion.text=evaluacion.FECHA
+
             itemView.setOnClickListener {
                 listener?.onEvaluacionSelected(snapshot)
             }
