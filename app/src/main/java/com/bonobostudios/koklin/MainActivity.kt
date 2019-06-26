@@ -8,7 +8,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bonobostudios.Adapter.EvaluacionAdapter
 import com.bonobostudios.Adapter.PacienteAdapter
+import com.bonobostudios.POJOS.evaluacion
 
 import com.bonobostudios.POJOS.paciente
 
@@ -26,11 +28,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 
-class MainActivity : AppCompatActivity(),PacienteAdapter.OnPacienteSelectedListener {
+class MainActivity : AppCompatActivity(),PacienteAdapter.OnPacienteSelectedListener,
+    EvaluacionAdapter.OnEvaluacionSelectedListener {
 
     val rootRef = FirebaseFirestore.getInstance()
     lateinit var query: Query
+    lateinit var query2: Query
     lateinit var adapter: PacienteAdapter
+    lateinit var adapter2 : EvaluacionAdapter
+    private var referenciaPaciente = ""
 
     //private var evaAdapter : evaluacionAdapter?=null
 
@@ -53,6 +59,7 @@ class MainActivity : AppCompatActivity(),PacienteAdapter.OnPacienteSelectedListe
         query= rootRef.collection("pacientes ").whereEqualTo("user","EXyDrJaUolaKgFREAWehl82V9vu2")
 
 
+
         //Adapter
 
         adapter=object : PacienteAdapter(query,this@MainActivity){
@@ -73,8 +80,10 @@ class MainActivity : AppCompatActivity(),PacienteAdapter.OnPacienteSelectedListe
             }
         }
 
+
         rvPacientes.layoutManager=LinearLayoutManager(this)
         rvPacientes.adapter=adapter
+
 
         actionProfile.setOnClickListener {
             val intent : Intent = Intent(this,ProfileActivity::class.java)
@@ -98,15 +107,48 @@ class MainActivity : AppCompatActivity(),PacienteAdapter.OnPacienteSelectedListe
 
         // Start listening for Firestore updates
         adapter.startListening()
+
+
     }
 
     public override fun onStop() {
         super.onStop()
         adapter.stopListening()
+        //adapter2.stopListening()
     }
 
     override fun onPacienteSelected(paciente: DocumentSnapshot) {
+        //Toast.makeText(this,"SIUUUUUUU",Toast.LENGTH_SHORT).show()
+        referenciaPaciente=paciente.id
+        query2=rootRef.collection("evaluaciones ").whereEqualTo("autor",referenciaPaciente)
+        adapter2=object : EvaluacionAdapter(query2,this@MainActivity){
+            override fun onDataChanged() {
+                if (itemCount==0){
+                    rvResultados.visibility=View.GONE
+                    Log.d("PENE","NADA PAPS")
+                }else{
+                    rvResultados.visibility=View.VISIBLE
+                }
+            }  override fun onError(e: FirebaseFirestoreException) {
+                // Show a snackbar on errors
+                Snackbar.make(findViewById(android.R.id.content),
+                    "Error: check logs for info.", Snackbar.LENGTH_LONG).show()
+            }
+        }
+        rvResultados.layoutManager=LinearLayoutManager(this)
+        rvResultados.adapter=adapter2
+        adapter2.startListening()
+
+        Toast.makeText(this,referenciaPaciente,Toast.LENGTH_SHORT).show()
+
+
+
+
+    }
+
+    override fun onEvaluacionSelected(evaluacion: DocumentSnapshot){
         Toast.makeText(this,"SIUUUUUUU",Toast.LENGTH_SHORT).show()
+
     }
     fun showSignInOptions(){
         startActivityForResult(AuthUI.getInstance()
