@@ -23,6 +23,10 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+import android.text.Editable
+import android.text.TextWatcher
+
+
 
 
 class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedListener,
@@ -31,6 +35,7 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
     val rootRef = FirebaseFirestore.getInstance()
     lateinit var query: Query
     lateinit var query2: Query
+    lateinit var query3: Query
     lateinit var adapter: PacienteAdapter
     lateinit var adapter2: EvaluacionAdapter
     private var referenciaPaciente = ""
@@ -40,6 +45,34 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
         setContentView(R.layout.activity_main)
 
         query = rootRef.collection("pacientes ").whereEqualTo("user", FirebaseAuth.getInstance().currentUser?.uid)
+
+
+
+
+        /*IB_button.setOnClickListener {
+            var busqueda= ET_search.text.toString()
+            query3=rootRef.collection("pacientes ").whereEqualTo("nombre",busqueda)
+            adapter.setQuery(query3)
+        }*/
+
+        ET_search.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                var busqueda= ET_search.text.toString().trim()
+                if(busqueda=="") query3= rootRef.collection("pacientes ").whereEqualTo("user", FirebaseAuth.getInstance().currentUser?.uid)
+                query3=rootRef.collection("pacientes ").whereEqualTo("nombre",busqueda)
+                adapter.setQuery(query3)
+            }
+        })
+
+
 
 //ADAPTER
         adapter = object : PacienteAdapter(query, this@MainActivity) {

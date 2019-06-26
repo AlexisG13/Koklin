@@ -45,7 +45,7 @@ class PatientInfoActivity : AppCompatActivity() {
 
            var aux =""
 
-            var nombre = etNombrePaciente.text.toString()
+            var nombre = etNombrePaciente.text.toString().trim()
             var edad = etEdadPaciente.text.toString()
 
             var user = FirebaseAuth.getInstance().currentUser?.uid
