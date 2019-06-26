@@ -69,7 +69,7 @@ class PatientInfoActivity : AppCompatActivity() {
             db.collection("pacientes ").add(pacient)
 
 
-            val intent : Intent = Intent(this,TestActivity::class.java)
+            val intent : Intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
 
         }

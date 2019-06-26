@@ -108,7 +108,6 @@
                 app:layout_constraintTop_toBottomOf="@id/LinearLayoutDeSeparacion1"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginTop="25dp"
-                android:layout_marginBottom="5dp"
                 android:visibility="invisible"
                 android:background="@drawable/border_layout"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -142,7 +141,7 @@
                 android:padding="5dp"
                 android:elevation="5dp"
                 android:background="@drawable/border_layout"
-                app:layout_constraintTop_toBottomOf="@id/LinearLayoutDeSeparacion1"
+                app:layout_constraintTop_toBottomOf="@id/NuevoTestPacienteCreado"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"></androidx.recyclerview.widget.RecyclerView>

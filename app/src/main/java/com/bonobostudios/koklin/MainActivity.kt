@@ -130,8 +130,9 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
         Toast.makeText(this, referenciaPaciente, Toast.LENGTH_SHORT).show()
         NuevoTestPacienteCreado.visibility = View.VISIBLE
         NuevoTestPacienteCreado.setOnClickListener {
-            val intent: Intent = Intent(this, TestActivity::class.java)
-            startActivity(intent)
+            val pintent: Intent = Intent(this, TestActivity::class.java)
+            pintent.putExtra("PACIENTE_ID",referenciaPaciente)
+            startActivity(pintent)
         }
 
     }

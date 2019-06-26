@@ -11,19 +11,20 @@ class TestActivity : AppCompatActivity()  {
 
 
     var namePac : String ="N/A"
-    var mIntent = intent
     // var paciente = mIntent.getStringExtra("paciente")
-    var paciente = "rJC3LJi56SN7kbC25Wph"
     val db = FirebaseFirestore.getInstance()
     var nPreguntas = 0
     var sIndex : Int = 0
     var banned = arrayListOf<Int>()
     var nActual = 0
     lateinit var mainFragment: ExerciseFragment
+    var paciente = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
+        var elIntent = this.intent
+        paciente = elIntent.getStringExtra("PACIENTE_ID")
         initMainFragment()
     }
 
@@ -57,7 +58,8 @@ class TestActivity : AppCompatActivity()  {
                 namePac = document.getString("nombre")!!
                 val mEv = hashMapOf(
                     "paciente" to namePac,
-                    "score" to nPreguntas
+                    "score" to nPreguntas,
+                    "autor" to paciente
                 )
                 db.collection("evaluaciones ").add(mEv)
             }
