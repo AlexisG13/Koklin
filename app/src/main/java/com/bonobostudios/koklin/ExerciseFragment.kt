@@ -130,11 +130,7 @@ class ExerciseFragment : Fragment(){
                     startActivity(mIntent)
                 }
                 else  xxx.initMainFragment()
-            },100)
-
+            },200)
         }
     }
-
-
-
 }

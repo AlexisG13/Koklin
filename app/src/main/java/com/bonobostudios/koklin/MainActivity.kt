@@ -35,20 +35,11 @@ class MainActivity : AppCompatActivity(),PacienteAdapter.OnPacienteSelectedListe
     lateinit var adapter2 : EvaluacionAdapter
     private var referenciaPaciente = ""
 
-    val db = FirebaseFirestore.getInstance()
-    private val REQUEST_CODE = 2019
-    val auth = FirebaseAuth.getInstance()
-
-    lateinit var providers : List<AuthUI.IdpConfig>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        providers = Arrays.asList(
-            AuthUI.IdpConfig.EmailBuilder().build(),
-            AuthUI.IdpConfig.GoogleBuilder().build()
-        )
 
         query= rootRef.collection("pacientes ").whereEqualTo("user","EXyDrJaUolaKgFREAWehl82V9vu2")
 
@@ -91,18 +82,8 @@ class MainActivity : AppCompatActivity(),PacienteAdapter.OnPacienteSelectedListe
             startActivity(intent)
         }
 
-        if(auth.currentUser==null){
-            showSignInOptions()
-        }
     }
 
-    fun showSignInOptions(){
-        startActivityForResult(AuthUI.getInstance()
-            .createSignInIntentBuilder()
-            .setAvailableProviders(providers)
-            .setLogo(R.drawable.koklin_banner)
-            .build(),REQUEST_CODE)
-    }
 
     public override fun onStart() {
         super.onStart()
@@ -157,68 +138,6 @@ class MainActivity : AppCompatActivity(),PacienteAdapter.OnPacienteSelectedListe
     }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == REQUEST_CODE){
-            var response = IdpResponse.fromResultIntent(data)
-            if(resultCode== Activity.RESULT_OK){
-                var user = FirebaseAuth.getInstance().currentUser
-                val query = rootRef.collection("pacientes ").whereEqualTo("user",usuario(user!!))
 
-
-
-
-                if (user != null) {
-                    if(!user.isEmailVerified){
-                        userExists(user)
-                        verCorreo(user)
-                    }
-                    else{
-
-                        finish()
-                        return
-                    }
-                    //Toast.makeText(this,user.email,Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
-    fun usuario(user : FirebaseUser):String{
-        return user.uid
-    }
-
-    fun verCorreo(user: FirebaseUser){
-        user.sendEmailVerification()
-    }
-
-    fun userExists(user:FirebaseUser){
-        val docIdRef = db.collection("users").document(user.uid)
-        docIdRef.get().addOnSuccessListener {document->
-            if(!document.exists()){
-                Toast.makeText(this,"se creo de nuevo",Toast.LENGTH_SHORT).show()
-                val userh = hashMapOf(
-                    "email" to user.email,
-                    "name" to user.displayName
-                )
-                db.collection("users").document(user.uid).set(userh)
-            }
-            else {
-
-
-                Toast.makeText(this,"Ya existe"+user.uid,Toast.LENGTH_SHORT).show()
-                var kk = db.collection("pacientes ").whereEqualTo("user",user.uid).get()
-
-
-                kk.addOnSuccessListener { documents->
-                    for(document in documents){
-                        Log.d("TORTY","${document.data}")
-                    }
-                    NumeroDePacientes.setText(documents.size().toString())
-                }
-            }
-            }
-        docIdRef.get()
-    }
 
 }

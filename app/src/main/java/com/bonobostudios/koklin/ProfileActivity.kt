@@ -1,5 +1,6 @@
 package com.bonobostudios.koklin
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.firebase.ui.auth.AuthUI
@@ -14,6 +15,15 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
+        btn_sign_out.setOnClickListener{
+            AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener {
+                    var mIntent = Intent(this,LoginActivity::class.java)
+                    startActivity(mIntent)
+                    finish()
+                }
+        }
     }
 
 }

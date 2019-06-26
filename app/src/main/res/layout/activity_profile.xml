@@ -79,7 +79,6 @@
             android:layout_height="wrap_content"
             android:text="LOG OUT"
             android:textStyle="bold"
-            android:enabled="false"
             app:layout_constraintTop_toBottomOf="@id/CargoEspecialista"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
