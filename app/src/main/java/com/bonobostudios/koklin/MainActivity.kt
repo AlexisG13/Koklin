@@ -2,28 +2,38 @@ package com.bonobostudios.koklin
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bonobostudios.POJOS.paciente
-import com.bonobostudios.koklin.Adapter.PacienteAdapterFirestore
+import com.bonobostudios.Adapter.EvaluacionAdapter
+import com.bonobostudios.Adapter.PacienteAdapter
+
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),PacienteAdapter.OnPacienteSelectedListener,
+    EvaluacionAdapter.OnEvaluacionSelectedListener {
 
     val rootRef = FirebaseFirestore.getInstance()
-    private  var adapter : PacienteAdapterFirestore? = null
+    lateinit var query: Query
+    lateinit var query2: Query
+    lateinit var adapter: PacienteAdapter
+    lateinit var adapter2 : EvaluacionAdapter
+    private var referenciaPaciente = ""
 
     val db = FirebaseFirestore.getInstance()
     private val REQUEST_CODE = 2019
@@ -34,11 +44,37 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        rvPacientes.layoutManager= LinearLayoutManager(this)
+
         providers = Arrays.asList(
             AuthUI.IdpConfig.EmailBuilder().build(),
             AuthUI.IdpConfig.GoogleBuilder().build()
         )
+
+        query= rootRef.collection("pacientes ").whereEqualTo("user","EXyDrJaUolaKgFREAWehl82V9vu2")
+
+//ADAPTER
+        adapter=object : PacienteAdapter(query,this@MainActivity){
+            override fun onDataChanged() {
+                if(itemCount==0){
+                    rvPacientes.visibility= View.GONE
+                    //viewEmpty.visibility = View.VISIBLE
+
+                }else{
+                    rvPacientes.visibility= View.VISIBLE
+                }
+
+            }
+            override fun onError(e: FirebaseFirestoreException) {
+                // Show a snackbar on errors
+                Snackbar.make(findViewById(android.R.id.content),
+                    "Error: check logs for info.", Snackbar.LENGTH_LONG).show()
+            }
+        }
+
+
+        rvPacientes.layoutManager=LinearLayoutManager(this)
+        rvPacientes.adapter=adapter
+
 
         actionProfile.setOnClickListener {
             val intent : Intent = Intent(this,ProfileActivity::class.java)
@@ -59,13 +95,7 @@ class MainActivity : AppCompatActivity() {
             showSignInOptions()
         }
     }
-    override fun onStop() {
-        super.onStop()
 
-        if (adapter != null) {
-            adapter!!.stopListening()
-        }
-    }
     fun showSignInOptions(){
         startActivityForResult(AuthUI.getInstance()
             .createSignInIntentBuilder()
@@ -74,6 +104,59 @@ class MainActivity : AppCompatActivity() {
             .build(),REQUEST_CODE)
     }
 
+    public override fun onStart() {
+        super.onStart()
+
+        // Start listening for Firestore updates
+        adapter.startListening()
+
+
+    }
+
+    public override fun onStop() {
+        super.onStop()
+        adapter.stopListening()
+        //adapter2.stopListening()
+    }
+
+    override fun onPacienteSelected(paciente: DocumentSnapshot) {
+        //Toast.makeText(this,"SIUUUUUUU",Toast.LENGTH_SHORT).show()
+        referenciaPaciente=paciente.id
+        query2=rootRef.collection("evaluaciones ").whereEqualTo("autor",referenciaPaciente)
+        adapter2=object : EvaluacionAdapter(query2,this@MainActivity){
+            override fun onDataChanged() {
+                if (itemCount==0){
+                    rvResultados.visibility=View.GONE
+                    Log.d("PENE","NADA PAPS")
+                }else{
+                    rvResultados.visibility=View.VISIBLE
+                }
+            }  override fun onError(e: FirebaseFirestoreException) {
+                // Show a snackbar on errors
+                Snackbar.make(findViewById(android.R.id.content),
+                    "Error: check logs for info.", Snackbar.LENGTH_LONG).show()
+            }
+        }
+        rvResultados.layoutManager=LinearLayoutManager(this)
+        rvResultados.adapter=adapter2
+        adapter2.startListening()
+
+        Toast.makeText(this,referenciaPaciente,Toast.LENGTH_SHORT).show()
+
+
+
+
+    }
+
+    override fun onEvaluacionSelected(evaluacion: DocumentSnapshot){
+        Toast.makeText(this,"SIUUUUUUU",Toast.LENGTH_SHORT).show()
+
+        val intent : Intent = Intent(this,TestActivity::class.java)
+        startActivity(intent)
+
+    }
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == REQUEST_CODE){
@@ -81,9 +164,9 @@ class MainActivity : AppCompatActivity() {
             if(resultCode== Activity.RESULT_OK){
                 var user = FirebaseAuth.getInstance().currentUser
                 val query = rootRef.collection("pacientes ").whereEqualTo("user",usuario(user!!))
-                val options = FirestoreRecyclerOptions.Builder<paciente>().setQuery(query, paciente::class.java).build()
-                adapter= PacienteAdapterFirestore(options)
-                rvPacientes.adapter=adapter
+
+
+
 
                 if (user != null) {
                     if(!user.isEmailVerified){
@@ -121,7 +204,7 @@ class MainActivity : AppCompatActivity() {
                 db.collection("users").document(user.uid).set(userh)
             }
             else {
-                adapter!!.startListening()
+
 
                 Toast.makeText(this,"Ya existe"+user.uid,Toast.LENGTH_SHORT).show()
                 var kk = db.collection("pacientes ").whereEqualTo("user",user.uid).get()
