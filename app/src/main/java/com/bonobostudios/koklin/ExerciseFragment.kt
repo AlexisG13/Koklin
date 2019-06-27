@@ -76,18 +76,8 @@ class ExerciseFragment : Fragment(){
     }
 
     private fun ReadAllQuestions() {
-        db.collection("nivel")
-            .get()
-            .addOnCompleteListener { task ->
-                for (document in task.result!!) {
-                    if (task.isSuccessful) {
                         val pReference = db.collection("sounds").document(sonido)
                         ReadAllAnswers(pReference, 1)
-                    } else {
-
-                    }
-                }
-            }
     }
 
     private fun ReadAllAnswers(reference: DocumentReference, pActual: Int) {
