@@ -6,12 +6,13 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 28
-    defaultConfig {
+    defaultConfig {9
+
         applicationId "com.bonobostudios.koklin"
         minSdkVersion 16
         multiDexEnabled true
         targetSdkVersion 28
-        versionCode 2
+        versionCode 3
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
