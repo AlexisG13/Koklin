@@ -35,7 +35,8 @@
         </activity>
         <activity
                 android:name=".SettingsActivity"
-                android:configChanges="orientation|keyboardHidden|screenSize">
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
                 android:name=".ProfileActivity"
@@ -46,8 +47,8 @@
         <activity
                 android:name=".MainActivity"
                 android:configChanges="orientation|keyboardHidden|screenSize"
-                android:windowSoftInputMode="adjustPan"
-        >
+                android:theme="@style/AppTheme.NoActionBar"
+                android:windowSoftInputMode="adjustPan">
         </activity>
     </application>
 
