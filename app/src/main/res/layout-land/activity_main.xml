@@ -36,6 +36,15 @@
                         android:textStyle="bold"
                         android:gravity="center"
                         android:layout_marginLeft="10dp"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:id="@+id/LinearLayoutDeSeparacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="#B9B9B9"
+                    android:orientation="vertical"></LinearLayout>
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_gravity="center">
                 <EditText
                         android:id="@+id/ET_search"
                         android:layout_width="188dp"
@@ -48,26 +57,10 @@
                 <ImageButton
                         android:id="@+id/IB_button"
                         android:layout_gravity="center"
-                        android:layout_width="10dp" android:layout_height="wrap_content"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:src="@drawable/ic_search_black_24dp"
                 />
-                <TextView
-                        android:id="@+id/NumeroDePacientes"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="255"
-                        android:padding="8dp"
-                        android:textColor="#FFF"
-                        android:textSize="23sp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/paciente_layout"/>
             </LinearLayout>
-            <LinearLayout
-                    android:id="@+id/LinearLayoutDeSeparacion"
-                    android:layout_width="match_parent"
-                    android:layout_height="5dp"
-                    android:background="#B9B9B9"
-                    android:orientation="vertical"></LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvPacientes"
                     android:layout_width="500dp"
@@ -77,7 +70,6 @@
                     android:background="@drawable/border_layout"
                     android:layout_gravity="center"
                     android:elevation="5dp"></androidx.recyclerview.widget.RecyclerView>
-
         </LinearLayout>
 
         <LinearLayout
