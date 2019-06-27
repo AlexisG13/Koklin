@@ -4,10 +4,10 @@ import com.google.firebase.firestore.IgnoreExtraProperties
 
 @IgnoreExtraProperties
 data class evaluacion(
-   val FECHA :String ="N/A",
-   val NRespuestas : String ="N/A",
+   val fecha :String ="N/A",
+   val score : Int =0,
    val autor : String = "N/A",
-   val nivelAU : String = "N/A"
+   val paciente : String = "N/A"
 ){
    companion object{
       const val FIELD_FECHA="fecha"

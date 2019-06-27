@@ -39,9 +39,9 @@ open class EvaluacionAdapter (query: Query, private val listener: OnEvaluacionSe
 
             val resources = itemView.resources
            // itemView.tv_fecha.text=evaluacion.FECHA
-            itemView.tv_numeroRespuestas.text=evaluacion.NRespuestas
+            itemView.tv_numeroRespuestas.text=evaluacion.score.toString()
 
-            itemView.fechaEvaluacion.text=evaluacion.FECHA
+            itemView.fechaEvaluacion.text=evaluacion.fecha
 
             itemView.setOnClickListener {
                 listener?.onEvaluacionSelected(snapshot)
