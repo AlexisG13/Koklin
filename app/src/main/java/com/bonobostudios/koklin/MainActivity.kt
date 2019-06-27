@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
             override fun afterTextChanged(s: Editable) {
                 var busqueda= ET_search.text.toString().trim()
                 if(busqueda=="") query3= rootRef.collection("pacientes ").whereEqualTo("user", FirebaseAuth.getInstance().currentUser?.uid)
-                query3=rootRef.collection("pacientes ").whereEqualTo("nombre",busqueda)
+                else query3=rootRef.collection("pacientes ").whereEqualTo("nombre",busqueda)
                 adapter.setQuery(query3)
             }
         })

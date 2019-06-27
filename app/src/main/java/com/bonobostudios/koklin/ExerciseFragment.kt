@@ -18,13 +18,14 @@ import kotlinx.android.synthetic.main.exercise_fragment.*
 
 class ExerciseFragment : Fragment(){
 
-    var mp: MediaPlayer? = null
+    //var mp: MediaPlayer? = null
     var intentos = 3
     var nPreguntas = 0
     lateinit var resp1 : TextView
     lateinit var resp2 : TextView
     lateinit var resp3 : TextView
     lateinit var ptText : TextView
+    lateinit var mp : MediaPlayer
     lateinit var xxx: TestActivity
     private lateinit var btn : Button
     val db = FirebaseFirestore.getInstance()
@@ -41,6 +42,8 @@ class ExerciseFragment : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.exercise_fragment,container,false)
+        var son = resources.getIdentifier(sonido,"raw", context?.packageName)
+        mp = MediaPlayer.create(context,son)
         bind(view)
         xxx = activity as TestActivity
         ReadAllQuestions()
@@ -53,9 +56,10 @@ class ExerciseFragment : Fragment(){
         resp3 = view.findViewById(R.id.respuesta3)
         ptText = view.findViewById(R.id.PreguntaID)
         btn = view.findViewById(R.id.btn_play)
-        var son = resources.getIdentifier(sonido,"raw", context?.packageName)
-        var mp = MediaPlayer.create(context,son)
+        //var son = resources.getIdentifier(sonido,"raw", context?.packageName)
+        //var mp = MediaPlayer.create(context,son)
         mp?.setOnCompletionListener {
+            mp.release()
             btn.isEnabled=true
             if(intentos==0) btn.isEnabled=false
         }
@@ -124,15 +128,16 @@ class ExerciseFragment : Fragment(){
             }
             Handler().postDelayed({
                 xxx.nActual+=1
-                if(xxx.nActual==3){
+                if(xxx.nActual==10){
+                    mp.reset()
+                    mp.release()
                     xxx.insertEva()
-                    var mIntent = Intent(activity,MainActivity::class.java)
-                    startActivity(mIntent)
                 }
                 else  {
+                    mp.reset()
                     xxx.deleteFragment(this)
                     xxx.initMainFragment()}
-            },200)
+            },0)
         }
     }
 }
