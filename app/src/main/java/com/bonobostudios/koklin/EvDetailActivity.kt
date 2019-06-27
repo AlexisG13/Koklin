@@ -40,10 +40,7 @@ class EvDetailActivity : AppCompatActivity() {
                 fecha=document.get("fecha").toString()
                 score=document.get("score").toString()
                 paciente=document.get("paciente").toString()
-
                 malas=10- score.toInt()
-
-
                 NombreExaminado.text= paciente
                 NumeroDeBuenas.text= score
                 ResultadoFinal.text= fecha

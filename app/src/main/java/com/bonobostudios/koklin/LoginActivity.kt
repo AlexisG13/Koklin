@@ -26,8 +26,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         providers = Arrays.asList(
-            AuthUI.IdpConfig.EmailBuilder().build()
-
+            AuthUI.IdpConfig.EmailBuilder().build(),
+            AuthUI.IdpConfig.GoogleBuilder().build()
         )
 
         if(auth.currentUser==null){
