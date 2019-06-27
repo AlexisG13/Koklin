@@ -26,8 +26,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         providers = Arrays.asList(
-            AuthUI.IdpConfig.EmailBuilder().build(),
-            AuthUI.IdpConfig.GoogleBuilder().build()
+            AuthUI.IdpConfig.EmailBuilder().build()
+
         )
 
         if(auth.currentUser==null){
@@ -55,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
                 if (user != null) {
                     if(!user.isEmailVerified){
                         userExists(user)
-                        verCorreo(user)
+
                     }
                     else{
 
@@ -67,9 +67,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun verCorreo(user: FirebaseUser){
-        user.sendEmailVerification()
-    }
 
     fun userExists(user: FirebaseUser){
         var mIntent = Intent(this,MainActivity::class.java)
