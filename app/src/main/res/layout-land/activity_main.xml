@@ -36,6 +36,21 @@
                         android:textStyle="bold"
                         android:gravity="center"
                         android:layout_marginLeft="10dp"/>
+                <EditText
+                        android:id="@+id/ET_search"
+                        android:layout_width="188dp"
+                        android:layout_gravity="center"
+                        android:imeOptions="flagNoExtractUi"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="0dp"
+                        android:text="  "
+                />
+                <ImageButton
+                        android:id="@+id/IB_button"
+                        android:layout_gravity="center"
+                        android:layout_width="10dp" android:layout_height="wrap_content"
+                        android:src="@drawable/ic_search_black_24dp"
+                />
                 <TextView
                         android:id="@+id/NumeroDePacientes"
                         android:layout_width="wrap_content"
@@ -115,16 +130,6 @@
                         android:padding="8dp"
                         android:textColor="#000"
                         android:textSize="20sp"
-                        android:gravity="center"/>
-                <TextView
-                        android:layout_width="50dp" android:layout_height="50dp"
-                        android:id="@+id/tv_numeroPaciente"
-                        android:text="+"
-                        android:background="#659C9A9A"
-                        android:lines="1"
-                        android:padding="8dp"
-                        android:textColor="#009104"
-                        android:textSize="25sp"
                         android:gravity="center"/>
             </RelativeLayout>
             <androidx.recyclerview.widget.RecyclerView

@@ -38,6 +38,7 @@
                     android:imeOptions="flagNoExtractUi"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:text="  "
                     app:layout_constraintLeft_toRightOf="@id/LayoutPacientes"
                     app:layout_constraintRight_toLeftOf="@id/IB_button"
                     app:layout_constraintTop_toTopOf="parent"
@@ -49,18 +50,6 @@
                     app:layout_constraintLeft_toRightOf="@id/ET_search"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
-            <TextView
-                    android:id="@+id/NumeroDePacientes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="255"
-                    android:padding="8dp"
-                    android:textColor="#FFF"
-                    android:background="@drawable/paciente_layout"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintLeft_toRightOf="@id/IB_button"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <LinearLayout
                 android:id="@+id/LinearLayoutDeSeparacion"
