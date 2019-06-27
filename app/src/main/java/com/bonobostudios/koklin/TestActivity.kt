@@ -55,7 +55,6 @@ class TestActivity : AppCompatActivity()  {
     }
 
     fun initMainFragment(){
-        Toast.makeText(this,paciente,Toast.LENGTH_SHORT).show()
         mainFragment = ExerciseFragment.newInstance(getSonido())
         var resource = R.id.main_fragment
         changeFragment(resource,mainFragment)

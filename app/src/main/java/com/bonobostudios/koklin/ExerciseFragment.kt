@@ -84,7 +84,7 @@ class ExerciseFragment : Fragment(){
                         val pReference = db.collection("sounds").document(sonido)
                         ReadAllAnswers(pReference, 1)
                     } else {
-                        Log.w("WARNING!", "No se pudo encontrar nada que cargar.", task.exception)
+
                     }
                 }
             }
@@ -109,7 +109,7 @@ class ExerciseFragment : Fragment(){
                             loadThings(resp3,respuesta,esCorrecta,pActual)
                         }
                     } else {
-                        Log.w("ERROR!", "Algo pasó porque no estamos en vivo.")
+
                     }
                 }
             }

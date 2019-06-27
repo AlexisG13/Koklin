@@ -41,9 +41,20 @@ class EvDetailActivity : AppCompatActivity() {
                 score=document.get("score").toString()
                 paciente=document.get("paciente").toString()
                 malas=10- score.toInt()
+                var Res = ""
+                if(score.toInt()<=4) {
+                    Res =  "Audicion baja"
+                }
+                else if(score.toInt()>=5&&score.toInt()<=8){
+                    Res = "Audicion media"
+                }
+                else if(score.toInt()>=9){
+                    Res = "Audicion buena"
+                }
                 NombreExaminado.text= paciente
                 NumeroDeBuenas.text= score
-                ResultadoFinal.text= fecha
+                ResultadoFinal.text= Res
+                Fecha.text = fecha
                 NumeroDeMalas.text= malas.toString()
 
 

@@ -73,7 +73,6 @@ class LoginActivity : AppCompatActivity() {
         val docIdRef = db.collection("users").document(user.uid)
         docIdRef.get().addOnSuccessListener {document->
             if(!document.exists()){
-                Toast.makeText(this,"se creo de nuevo", Toast.LENGTH_SHORT).show()
                 val userh = hashMapOf(
                     "email" to user.email,
                     "name" to user.displayName
@@ -82,7 +81,6 @@ class LoginActivity : AppCompatActivity() {
 
             }
             else {
-                Toast.makeText(this,"Ya existe"+user.uid, Toast.LENGTH_SHORT).show()
             }
         }
         docIdRef.get()
