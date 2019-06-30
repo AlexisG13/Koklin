@@ -1,7 +1,7 @@
 # Koklin
 <p align="center">
 <a href="#">
-<img src=" Koklin/app/src/main/res/drawable/koklin_solo_logo.png " alt="Koklin's logo" width="190vw"></a>
+<img src=" app/src/main/res/drawable/koklin_solo_logo.png " alt="Koklin's logo" width="190vw"></a>
 </p>
 
 > Developed by Bonobo Studios.
@@ -66,6 +66,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+More info about Terms of Service and Privacy Policy by clicking [here](https://alexisg13.github.io/PrivacyPolicy).
 
 [Back To The Top](#read-me-template)
 
