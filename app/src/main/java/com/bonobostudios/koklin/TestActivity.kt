@@ -77,6 +77,7 @@ class TestActivity : AppCompatActivity()  {
                     var mIntent = Intent(this,EvDetailActivity::class.java)
                     mIntent.putExtra("EVALUACION_ID",nDoc)
                     startActivity(mIntent)
+                    finish()
                 }
             }
         }

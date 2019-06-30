@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
             }
-
             override fun afterTextChanged(s: Editable) {
                 val busqueda = ET_search.text.toString().trim()
                 if (busqueda == "") query3 =
@@ -124,7 +123,6 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
 
     public override fun onStart() {
         super.onStart()
-
         // Start listening for Firestore updates
         adapter.startListening()
 

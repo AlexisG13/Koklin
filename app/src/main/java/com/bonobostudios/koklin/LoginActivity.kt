@@ -86,5 +86,6 @@ class LoginActivity : AppCompatActivity() {
         docIdRef.get()
         mIntent.putExtra("USER_ID",user.uid)
         startActivity(mIntent)
+        finish()
     }
 }

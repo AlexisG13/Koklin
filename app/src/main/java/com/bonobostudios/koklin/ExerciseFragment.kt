@@ -21,6 +21,7 @@ class ExerciseFragment : Fragment(){
     //var mp: MediaPlayer? = null
     var intentos = 3
     var nPreguntas = 0
+    var flagSound = 0
     lateinit var resp1 : TextView
     lateinit var resp2 : TextView
     lateinit var resp3 : TextView
@@ -50,23 +51,29 @@ class ExerciseFragment : Fragment(){
         return view
     }
 
+    override fun onResume() {
+        super.onResume()
+        mp.start()
+        flagSound=1
+    }
+
     private fun bind(view:View){
         resp1 = view.findViewById(R.id.respuesta1)
         resp2 = view.findViewById(R.id.respuesta2)
         resp3 = view.findViewById(R.id.respuesta3)
         ptText = view.findViewById(R.id.PreguntaID)
         btn = view.findViewById(R.id.btn_play)
-        //var son = resources.getIdentifier(sonido,"raw", context?.packageName)
-        //var mp = MediaPlayer.create(context,son)
+        btn.isEnabled=false
         mp?.setOnCompletionListener {
-            mp.release()
             btn.isEnabled=true
+            flagSound=0
             if(intentos==0) btn.isEnabled=false
         }
         btn.setOnClickListener{
             if(intentos>=1){
                 btn.isEnabled=false
                 mp.start()
+                flagSound=1
                 intentos-=1
                 var n = IntentosRestantes.text.toString().toInt()
                 n -= 1
@@ -119,12 +126,16 @@ class ExerciseFragment : Fragment(){
             Handler().postDelayed({
                 xxx.nActual+=1
                 if(xxx.nActual==10){
+                    if(flagSound==1) mp.stop()
                     mp.reset()
                     mp.release()
+                    xxx.deleteFragment(this)
                     xxx.insertEva()
                 }
                 else  {
+                    if (flagSound==1) mp.stop()
                     mp.reset()
+                    mp.release()
                     xxx.deleteFragment(this)
                     xxx.initMainFragment()}
             },0)

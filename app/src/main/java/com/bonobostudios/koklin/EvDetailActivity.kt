@@ -28,6 +28,7 @@ class EvDetailActivity : AppCompatActivity() {
         BtnAceptarResultados.setOnClickListener {
             val intent : Intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         read(paciente)
