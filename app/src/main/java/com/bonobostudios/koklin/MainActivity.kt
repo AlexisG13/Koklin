@@ -180,11 +180,7 @@ val capi = Intent(this,EvPatientsActivity::class.java)
 
 /*
         NuevoTestPacienteCreado.visibility = View.VISIBLE
-        NuevoTestPacienteCreado.setOnClickListener {
-            val pintent: Intent = Intent(this, TestActivity::class.java)
-            pintent.putExtra("PACIENTE_ID", referenciaPaciente)
-            startActivity(pintent)
-        }
+
 */
 
     }

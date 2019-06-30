@@ -57,7 +57,11 @@ class EvPatientsActivity : AppCompatActivity(),EvaluacionAdapter.OnEvaluacionSel
         rvResultados.layoutManager=LinearLayoutManager(this)
         rvResultados.adapter=adapter
 
-
+        botonmas.setOnClickListener {
+            val pintent= Intent(this, TestActivity::class.java)
+            pintent.putExtra("PACIENTE_ID", paciente)
+            startActivity(pintent)
+        }
 
 
 
@@ -82,7 +86,11 @@ class EvPatientsActivity : AppCompatActivity(),EvaluacionAdapter.OnEvaluacionSel
         //adapter2.stopListening()
     }
 
+
+
     override fun onEvaluacionSelected(evaluacion: DocumentSnapshot) {
+
+
 
 
         val intent: Intent = Intent(this, EvDetailActivity::class.java)
