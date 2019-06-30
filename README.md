@@ -1,7 +1,7 @@
 # Koklin
 <p align="center">
 <a href="#">
-<img src=" app/src/main/res/drawable/koklin_solo_logo.png " alt="Koklin's logo" width="190vw"></a>
+<img src="app/src/main/res/drawable/koklin_solo_logo.png" alt="Koklin's logo" width="190vw"></a>
 </p>
 
 > Developed by Bonobo Studios.
