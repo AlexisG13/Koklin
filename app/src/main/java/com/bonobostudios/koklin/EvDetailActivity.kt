@@ -26,8 +26,8 @@ class EvDetailActivity : AppCompatActivity() {
         val paciente = intent.getStringExtra("EVALUACION_ID")
 
         BtnAceptarResultados.setOnClickListener {
-            val intent  = Intent(this,MainActivity::class.java)
-            startActivity(intent)
+            val intentE  = Intent(this@EvDetailActivity,MainActivity::class.java)
+            startActivity(intentE)
             finish()
         }
 

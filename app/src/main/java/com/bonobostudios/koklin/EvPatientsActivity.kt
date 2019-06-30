@@ -90,7 +90,9 @@ class EvPatientsActivity : AppCompatActivity(),EvaluacionAdapter.OnEvaluacionSel
 
     override fun onEvaluacionSelected(evaluacion: DocumentSnapshot) {
 
-
+        val intento = Intent(this, EvDetailActivity::class.java)
+        var pacienteID = intento.putExtra("EVALUACION_ID",evaluacion.id)
+        startActivity(intento)
 
     }
 
