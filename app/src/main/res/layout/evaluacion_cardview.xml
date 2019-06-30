@@ -20,6 +20,7 @@
                 android:text="Puntaje:"
                 android:textColor="#FFF"/>
         <TextView
+                android:id="@+id/puntaje"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -69,6 +70,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:id="@+id/fechaEVa"
+
                     android:text="20/04/2019"
                     android:textSize="12sp"/>
         </LinearLayout>
