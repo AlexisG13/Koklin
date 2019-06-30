@@ -13,13 +13,13 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_ev_patients.*
 import kotlinx.android.synthetic.main.activity_ev_patients.rvResultados
-import kotlinx.android.synthetic.main.activity_main.*
+
 
 
 private var paciente=""
 class EvPatientsActivity : AppCompatActivity(),EvaluacionAdapter.OnEvaluacionSelectedListener {
 
-    val rootRef = FirebaseFirestore.getInstance()
+    private val rootRef = FirebaseFirestore.getInstance()
     lateinit var query: Query
     lateinit var adapter: EvaluacionAdapter
 
@@ -33,7 +33,7 @@ class EvPatientsActivity : AppCompatActivity(),EvaluacionAdapter.OnEvaluacionSel
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ev_patients)
 
-        var elIntent = intent
+        val elIntent = intent
         paciente= elIntent.getStringExtra("LAREFERENCIA")
 
         query=rootRef.collection("evaluaciones ").whereEqualTo("autor", paciente)
@@ -91,11 +91,6 @@ class EvPatientsActivity : AppCompatActivity(),EvaluacionAdapter.OnEvaluacionSel
     override fun onEvaluacionSelected(evaluacion: DocumentSnapshot) {
 
 
-
-
-        val intent: Intent = Intent(this, EvDetailActivity::class.java)
-        var pacienteID = intent.putExtra("EVALUACION_ID",evaluacion.id)
-        startActivity(intent)
 
     }
 

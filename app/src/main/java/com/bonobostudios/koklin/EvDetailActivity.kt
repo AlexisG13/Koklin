@@ -21,12 +21,12 @@ class EvDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.respuestas_activity)
 
-        var intent= intent
+        val intent= intent
         //var usuario = intent.getStringExtra("USER_ID")
-        var paciente = intent.getStringExtra("EVALUACION_ID")
+        val paciente = intent.getStringExtra("EVALUACION_ID")
 
         BtnAceptarResultados.setOnClickListener {
-            val intent : Intent = Intent(this,MainActivity::class.java)
+            val intent  = Intent(this,MainActivity::class.java)
             startActivity(intent)
             finish()
         }
