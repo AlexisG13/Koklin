@@ -23,15 +23,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.pacientes_cardview.*
 
 
-class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedListener,
-    EvaluacionAdapter.OnEvaluacionSelectedListener {
+class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedListener
+     {
 
     val rootRef = FirebaseFirestore.getInstance()
     lateinit var query: Query
     lateinit var query2: Query
     lateinit var query3: Query
     lateinit var adapter: PacienteAdapter
-    lateinit var adapter2: EvaluacionAdapter
     private var referenciaPaciente = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,6 +69,7 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
 
                 } else {
                     rvPacientes.visibility = View.VISIBLE
+                    NumeroDePacientes.text=itemCount.toString()
                 }
 
             }
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
             startActivity(intent)
         }
 
-        NavigationDrawer.setOnClickListener {
+       NavigationDrawer.setOnClickListener {
             val popupMenu = PopupMenu(this, it)
             popupMenu.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
@@ -123,7 +123,7 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
                 popupMenu.show()
             }
         }
-
+/*
         MenuEB.setOnClickListener{
             val popupMenu = PopupMenu(this, it)
             popupMenu.setOnMenuItemClickListener { item ->
@@ -152,7 +152,7 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
             } finally {
                 popupMenu.show()
             }
-        }
+        }*/
     }
 
 
@@ -173,46 +173,23 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
 
     override fun onPacienteSelected(paciente: DocumentSnapshot) {
         referenciaPaciente = paciente.id
-        query2 = rootRef.collection("evaluaciones ").whereEqualTo("autor", referenciaPaciente)
-        adapter2 = object : EvaluacionAdapter(query2, this@MainActivity) {
-            override fun onDataChanged() {
-                if (itemCount == 0) {
-                    rvResultados.visibility = View.GONE
-                } else {
-                    rvResultados.visibility = View.VISIBLE
-                }
-            }
 
-            override fun onError(e: FirebaseFirestoreException) {
-                // Show a snackbar on errors
-                Snackbar.make(
-                    findViewById(android.R.id.content),
-                    "Error: check logs for info.", Snackbar.LENGTH_LONG
-                ).show()
-            }
-        }
-        rvResultados.layoutManager = LinearLayoutManager(this)
-        rvResultados.adapter = adapter2
-        adapter2.startListening()
+val capi = Intent(this,EvPatientsActivity::class.java)
+        capi.putExtra("LAREFERENCIA",referenciaPaciente)
+        startActivity(capi)
 
-
+/*
         NuevoTestPacienteCreado.visibility = View.VISIBLE
         NuevoTestPacienteCreado.setOnClickListener {
             val pintent: Intent = Intent(this, TestActivity::class.java)
             pintent.putExtra("PACIENTE_ID", referenciaPaciente)
             startActivity(pintent)
         }
+*/
 
     }
 
-    override fun onEvaluacionSelected(evaluacion: DocumentSnapshot) {
 
-
-        val intent: Intent = Intent(this, EvDetailActivity::class.java)
-        var pacienteID = intent.putExtra("EVALUACION_ID", evaluacion.id)
-        startActivity(intent)
-
-    }
 
 
 }

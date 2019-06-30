@@ -38,6 +38,9 @@ open class PacienteAdapter (query: Query,private val listener: OnPacienteSelecte
             val resources = itemView.resources
 
             itemView.tv_nombrePaciente.text=paciente.nombre
+            itemView.EdadDelPaciente.text=paciente.edad
+            itemView.SexoDelPaciente.text=paciente.genero
+            itemView.FechaDeRegistro.text=paciente.fecha
             itemView.setOnClickListener {
                 listener?.onPacienteSelected(snapshot)
             }

@@ -7,6 +7,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_patient_info.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 /*
 override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +52,8 @@ class PatientInfoActivity : AppCompatActivity() {
 
             var user = FirebaseAuth.getInstance().currentUser?.uid
 
+           var date = SimpleDateFormat("dd-MM-yyyy").format(Date()).toString()
+
            if (opcion==1){
                aux="M"
            }else if(opcion==2){
@@ -62,7 +66,8 @@ class PatientInfoActivity : AppCompatActivity() {
                 "nombre" to nombre,
                 "edad" to edad,
                 "user" to user,
-                "genero" to aux
+                "genero" to aux,
+                "fecha" to date
 
             )
 
