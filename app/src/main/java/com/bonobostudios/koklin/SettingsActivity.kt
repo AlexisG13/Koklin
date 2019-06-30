@@ -1,5 +1,7 @@
 package com.bonobostudios.koklin
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.webkit.WebView
@@ -12,6 +14,14 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        tv_pp.setMovementMethod(LinkMovementMethod.getInstance())
+        tv_pp.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://alexisg13.github.io/PrivacyPolicy"))
+            startActivity(intent)
+        }
+
+        InformacionViewClick.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

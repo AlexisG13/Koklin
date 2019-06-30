@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:id="@+id/opt_perfil"
+            android:title="Mi perfil"
+            android:icon="@drawable/ic_person_black_24dp"/>
+    <item
+            android:id="@+id/opt_informacion"
+            android:title="Información"
+            android:icon="@drawable/ic_info_black_24dp"/>
+</menu>

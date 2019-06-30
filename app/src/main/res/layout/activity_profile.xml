@@ -5,9 +5,26 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/bgOP"
         tools:context=".ProfileActivity">
 
 
+    <LinearLayout
+            android:id="@+id/laParteDeArriba"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#60BFAD"
+            android:gravity="left"
+            android:padding="3dp"
+            android:elevation="5dp"
+            app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+                android:id="@+id/MyProfileView"
+                android:padding="5dp"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:src="@drawable/mi_perfil_view"/>
+    </LinearLayout>
     <ImageView
             android:id="@+id/ProfilePhoto"
             android:layout_width="120dp"
@@ -15,10 +32,11 @@
             android:padding="10dp"
             android:src="@drawable/ic_person_black_24dp"
             android:background="@drawable/round_image_layout"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/laParteDeArriba"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/NombreEspecialista"/>
+            app:layout_constraintBottom_toTopOf="@id/NombreEspecialista"
+            android:elevation="5dp"/>
     <TextView
             android:id="@+id/NombreEspecialista"
             android:layout_width="match_parent"
@@ -28,18 +46,20 @@
             android:textSize="40sp"
             android:textStyle="bold"
             android:padding="10dp"
+            android:layout_marginLeft="50dp"
             app:layout_constraintTop_toBottomOf="@id/ProfilePhoto"
             app:layout_constraintBottom_toTopOf="@id/CargoEspecialista"/>
     <TextView
             android:id="@+id/CargoEspecialista"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cargo del Especialista"
+            android:text="Correo del especialista"
             android:gravity="center"
             android:textSize="20sp"
             android:padding="5dp"
+            android:layout_marginLeft="60dp"
             app:layout_constraintTop_toBottomOf="@id/NombreEspecialista"
-    />
+            app:layout_constraintBottom_toTopOf="@id/btn_sign_out"/>
 
 
 
@@ -49,6 +69,8 @@
             android:layout_height="wrap_content"
             android:text="LOG OUT"
             android:textStyle="bold"
+            android:padding="20dp"
+            android:background="#FFF"
             app:layout_constraintTop_toBottomOf="@id/CargoEspecialista"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

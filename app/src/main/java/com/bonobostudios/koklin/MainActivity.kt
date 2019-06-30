@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,9 +50,10 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
             }
 
             override fun afterTextChanged(s: Editable) {
-                var busqueda= ET_search.text.toString().trim()
-                if(busqueda=="") query3= rootRef.collection("pacientes ").whereEqualTo("user", FirebaseAuth.getInstance().currentUser?.uid)
-                else query3=rootRef.collection("pacientes ").whereEqualTo("nombre",busqueda)
+                var busqueda = ET_search.text.toString().trim()
+                if (busqueda == "") query3 =
+                    rootRef.collection("pacientes ").whereEqualTo("user", FirebaseAuth.getInstance().currentUser?.uid)
+                else query3 = rootRef.collection("pacientes ").whereEqualTo("nombre", busqueda)
                 adapter.setQuery(query3)
             }
         })
@@ -84,22 +86,42 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
         rvPacientes.layoutManager = LinearLayoutManager(this)
         rvPacientes.adapter = adapter
 
-
-        actionProfile.setOnClickListener {
-            val intent: Intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
-        }
-
-        actionSettings.setOnClickListener {
-            val intent: Intent = Intent(this, SettingsActivity::class.java)
-            startActivity(intent)
-        }
-
         StartANewTestIcon.setOnClickListener {
             val intent: Intent = Intent(this, PatientInfoActivity::class.java)
             startActivity(intent)
         }
 
+        NavigationDrawer.setOnClickListener {
+            val popupMenu = PopupMenu(this, it)
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.opt_perfil -> {
+                        val intent = Intent(this, ProfileActivity::class.java)
+                        startActivity(intent)
+                        true
+                    }
+                    R.id.opt_informacion -> {
+                        val intent: Intent = Intent(this, SettingsActivity::class.java)
+                        startActivity(intent)
+                        true
+                    }
+                    else -> false
+                }
+            }
+            popupMenu.inflate(R.menu.navigation_drawer)
+
+            try {
+                val fieldMPopup = PopupMenu::class.java.getDeclaredField("mPopup")
+                fieldMPopup.isAccessible = true
+                val mPopup = fieldMPopup.get(popupMenu)
+                mPopup.javaClass.getDeclaredMethod("setForceShowIcon", Boolean::class.java)
+                    .invoke(mPopup, true)
+            } catch (e: Exception) {
+                Log.e("ERROR ICON:", "No se muestran los íconos de  los menú", e)
+            } finally {
+                popupMenu.show()
+            }
+        }
     }
 
 
@@ -146,7 +168,7 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
         NuevoTestPacienteCreado.visibility = View.VISIBLE
         NuevoTestPacienteCreado.setOnClickListener {
             val pintent: Intent = Intent(this, TestActivity::class.java)
-            pintent.putExtra("PACIENTE_ID",referenciaPaciente)
+            pintent.putExtra("PACIENTE_ID", referenciaPaciente)
             startActivity(pintent)
         }
 
@@ -156,7 +178,7 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
 
 
         val intent: Intent = Intent(this, EvDetailActivity::class.java)
-        var pacienteID = intent.putExtra("EVALUACION_ID",evaluacion.id)
+        var pacienteID = intent.putExtra("EVALUACION_ID", evaluacion.id)
         startActivity(intent)
 
     }

@@ -9,29 +9,55 @@
         android:orientation="vertical"
         android:gravity="center">
 
-    <TextView
-            android:layout_width="wrap_content"
+    <LinearLayout
+            android:id="@+id/laParteDeArriba"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Developed by:"/>
-    <TextView
-            android:layout_width="wrap_content"
+            android:background="#60BFAD"
+            android:gravity="left"
+            android:padding="3dp"
+            android:elevation="5dp"
+            app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+                android:id="@+id/InformacionViewClick"
+                android:padding="5dp"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:src="@drawable/informacion_imagen"/>
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bonobo Studios™"
-            android:textSize="20dp"
-            android:textStyle="bold"/>
-    <TextView
-            android:layout_marginTop="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mail:"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="bonobostudiossv@gmail.com"
-            android:textColor="#3F51B5"/>
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/pregunta_view"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:layout_weight="2"
+            android:elevation="5dp">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Developed by:"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bonobo Studios™"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+        <TextView
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mail:"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="bonobostudiossv@gmail.com"
+                android:textColor="#3F51B5"/>
+    </LinearLayout>
 
     <LinearLayout
-            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="3dp"
             android:background="#E4E4E4"></LinearLayout>
@@ -41,21 +67,17 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_gravity="center">
-        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:orientation="vertical"
-                      android:gravity="center"
-                      android:layout_gravity="center"
-                      android:layout_marginLeft="25dp"
-                      android:layout_marginRight="10dp">
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Privacy Policy and Terms of Service"
-                    android:textStyle="bold"
-                    android:layout_gravity="right"/>
-        </LinearLayout>
-
+            android:layout_gravity="center"
+            android:layout_weight=""
+            android:layout_margin="20dp">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Privacy Policy and Terms of Service"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:gravity="center"
+                android:layout_weight="1"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,15 +85,25 @@
                 android:text="https://alexisg13.github.io/PrivacyPolicy"
                 android:textColor="#3F51B5"
                 android:padding="10dp"
-                android:layout_gravity="right"/>
+                android:gravity="center"
+                android:layout_weight="1"/>
     </LinearLayout>
-    <TextView
-            android:layout_marginTop="30dp"
-            android:id="@+id/Koklin"
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+        <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+        android:src="@drawable/koklin_solo_logo"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Koklin ©2019"
-            android:gravity="center"/>
-
+            android:gravity="center"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
 
 </LinearLayout>

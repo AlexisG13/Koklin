@@ -9,9 +9,12 @@
             android:roundIcon="@mipmap/ic_launcher_kotlin_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity"
-                  android:configChanges="orientation|keyboardHidden|screenSize"
-                  android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".EvPatientsActivity">
+        </activity>
+        <activity
+                android:name=".LoginActivity"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

@@ -3,4 +3,6 @@
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="imagen_del_paciente">Imagen del paciente</string>
+    <string name="nombre_del_paciente">Nombre del paciente</string>
 </resources>
