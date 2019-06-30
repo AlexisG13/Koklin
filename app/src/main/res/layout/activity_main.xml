@@ -83,7 +83,7 @@
             android:layout_height="match_parent"
             android:layout_margin="20dp"
             android:padding="5dp"
-            android:background="#FFF"
+            android:background="#f9f7e8"
             android:layout_weight="3"></androidx.recyclerview.widget.RecyclerView>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

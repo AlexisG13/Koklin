@@ -20,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.pacientes_cardview.*
 
 
 class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedListener,
@@ -109,6 +110,36 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
                 }
             }
             popupMenu.inflate(R.menu.navigation_drawer)
+
+            try {
+                val fieldMPopup = PopupMenu::class.java.getDeclaredField("mPopup")
+                fieldMPopup.isAccessible = true
+                val mPopup = fieldMPopup.get(popupMenu)
+                mPopup.javaClass.getDeclaredMethod("setForceShowIcon", Boolean::class.java)
+                    .invoke(mPopup, true)
+            } catch (e: Exception) {
+                Log.e("ERROR ICON:", "No se muestran los íconos de  los menú", e)
+            } finally {
+                popupMenu.show()
+            }
+        }
+
+        MenuEB.setOnClickListener{
+            val popupMenu = PopupMenu(this, it)
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.opt_edit -> {
+                        Toast.makeText(this,"Click en edit",Toast.LENGTH_SHORT).show()
+                        true
+                    }
+                    R.id.opt_delete -> {
+                        Toast.makeText(this,"Click en delete",Toast.LENGTH_SHORT).show()
+                        true
+                    }
+                    else -> false
+                }
+            }
+            popupMenu.inflate(R.menu.popup_paciente_menu)
 
             try {
                 val fieldMPopup = PopupMenu::class.java.getDeclaredField("mPopup")
