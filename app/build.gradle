@@ -10,10 +10,10 @@ android {
         9
 
         applicationId "com.bonobostudios.koklin"
-        minSdkVersion 21
+        minSdkVersion 16
         multiDexEnabled true
         targetSdkVersion 28
-        versionCode 3
+        versionCode 6
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

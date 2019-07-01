@@ -53,15 +53,7 @@ class LoginActivity : AppCompatActivity() {
             if(resultCode== Activity.RESULT_OK){
                 var user = FirebaseAuth.getInstance().currentUser
                 if (user != null) {
-                    if(!user.isEmailVerified){
                         userExists(user)
-
-                    }
-                    else{
-
-                        finish()
-                        return
-                    }
                 }
             }
         }
