@@ -32,9 +32,11 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Creamos la query que utlizaremos para buscar en la coleccion los pacientes que le pertenecen a el usuario logueado
+
         query = rootRef.collection("pacientes ").whereEqualTo("user", FirebaseAuth.getInstance().currentUser?.uid)
 
-
+//El buscador que cada vez que se escriba texto ejecutara la busqueda
         ET_search.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
@@ -43,6 +45,7 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
             }
+            //La busqueda lo que hace es simplemente cambiar la query que esta usando el adapter para obtener la informacion
             override fun afterTextChanged(s: Editable) {
                 val busqueda = ET_search.text.toString().trim()
                 if (busqueda == "") query3 =
@@ -54,12 +57,16 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
 
 
 
-
+//Creamos un objeto adapter que sera de tipo PAcienteAdapter, de parametro le psamos la query
+        //y el contexto de la actividad en que esta
         adapter = object : PacienteAdapter(query, this@MainActivity) {
+            //Cuando cambia la data contamos la cantidad de pacientes
+
             override fun onDataChanged() {
                 if (itemCount == 0) {
                     rvPacientes.visibility = View.GONE
 
+//Si la cantidad de pacientes es mayor que 0 se muestra el recycler view y agregamos esa cantidad a nuestro contador de pacientes
 
                 } else {
                     rvPacientes.visibility = View.VISIBLE
@@ -123,7 +130,7 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
 
     public override fun onStart() {
         super.onStart()
-        // Start listening for Firestore updates
+        // Escucha el adapter los cambios en la BD
         adapter.startListening()
 
 
@@ -132,11 +139,12 @@ class MainActivity : AppCompatActivity(), PacienteAdapter.OnPacienteSelectedList
     public override fun onStop() {
         super.onStop()
         adapter.stopListening()
-        //adapter2.stopListening()
+        //Deja de escuchar ambios en la BD
     }
 
     override fun onPacienteSelected(paciente: DocumentSnapshot) {
         referenciaPaciente = paciente.id
+        //Cuando seleccionamos un paciente enviamos la referencia de su id a otra actividad
 
 val capi = Intent(this,EvPatientsActivity::class.java)
         capi.putExtra("LAREFERENCIA",referenciaPaciente)

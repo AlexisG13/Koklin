@@ -11,6 +11,10 @@ import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.evaluacion_cardview.view.*
 
+
+// Adapter para una lista de evaluaciones
+// Es una clase abierta lo que significa que va a poder heredar sus metodos a objetos Que sean de su tipo
+
 open class EvaluacionAdapter (query: Query, private val listener: OnEvaluacionSelectedListener) :
     FirestoreAdapter<EvaluacionAdapter.ViewHolder>(query){
 
@@ -42,7 +46,7 @@ open class EvaluacionAdapter (query: Query, private val listener: OnEvaluacionSe
             itemView.puntaje.text=evaluacion.score.toString()
 
             itemView.fechaEVa.text=evaluacion.fecha
-
+//El clickListener
             itemView.setOnClickListener {
                 listener?.onEvaluacionSelected(snapshot)
             }

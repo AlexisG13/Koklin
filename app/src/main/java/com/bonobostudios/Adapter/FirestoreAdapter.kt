@@ -1,16 +1,13 @@
 package com.bonobostudios.Adapter
 
-import android.app.DownloadManager
-import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.DocumentSnapshot
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.ListenerRegistration
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QuerySnapshot
-import java.util.ArrayList
+import java.util.*
+
+
+//Clase abstracta para poder implementar sus metodos en las otras clases adapter que tenemos
 
 abstract class FirestoreAdapter <VH : RecyclerView.ViewHolder>(private var query: Query?) :
     RecyclerView.Adapter<VH>(),
@@ -31,7 +28,7 @@ abstract class FirestoreAdapter <VH : RecyclerView.ViewHolder>(private var query
             return
         }
 
-        // Dispatch the event
+        // Envia el evento
         Log.d(TAG, "onEvent:numChanges:" + documentSnapshots.documentChanges.size)
         for (change in documentSnapshots.documentChanges) {
             when (change.type) {
@@ -43,13 +40,13 @@ abstract class FirestoreAdapter <VH : RecyclerView.ViewHolder>(private var query
 
         onDataChanged()
     }
-
+//Funcion que nos servira para "escuchar" cambios en la BD de firestore
     fun startListening() {
         if (query != null && registration == null) {
             registration = query!!.addSnapshotListener(this)
         }
     }
-
+    ////Funcion que nos servira para dejar de "escuchar2 cambios en la BD de firestore
     fun stopListening() {
         registration?.remove()
         registration = null
@@ -58,15 +55,17 @@ abstract class FirestoreAdapter <VH : RecyclerView.ViewHolder>(private var query
         notifyDataSetChanged()
     }
 
+    //Esta funcion la usamos por si queremos cambiar la query que esta ejecutando el adapter
+
     fun setQuery(query: Query) {
-        // Stop listening
+        // Primero deja de escuchar
         stopListening()
 
-        // Clear existing data
+        // Borra la data ya existente
         snapshots.clear()
         notifyDataSetChanged()
 
-        // Listen to new query
+        //Empieza a escuchar la nueva query
         this.query = query
         startListening()
     }
@@ -85,10 +84,13 @@ abstract class FirestoreAdapter <VH : RecyclerView.ViewHolder>(private var query
         return snapshots[index]
     }
 
+
     private fun onDocumentAdded(change: DocumentChange) {
         snapshots.add(change.newIndex, change.document)
         notifyItemInserted(change.newIndex)
     }
+
+
 
     private fun onDocumentModified(change: DocumentChange) {
         if (change.oldIndex == change.newIndex) {

@@ -10,6 +10,8 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.pacientes_cardview.view.*
 
+// Adapter para una lista de pacientes
+// Es una clase abierta lo que significa que va a poder heredar sus metodos a objetos Que sean de su tipo
 open class PacienteAdapter (query: Query,private val listener: OnPacienteSelectedListener):FirestoreAdapter<PacienteAdapter.ViewHolder>(query){
 
     interface OnPacienteSelectedListener{
@@ -41,6 +43,8 @@ open class PacienteAdapter (query: Query,private val listener: OnPacienteSelecte
             itemView.EdadDelPaciente.text=paciente.edad
             itemView.SexoDelPaciente.text=paciente.genero
             itemView.FechaDeRegistro.text=paciente.fecha
+
+            //El clickListener
             itemView.setOnClickListener {
                 listener?.onPacienteSelected(snapshot)
             }

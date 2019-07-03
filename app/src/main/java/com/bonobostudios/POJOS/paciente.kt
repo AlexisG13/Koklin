@@ -2,6 +2,9 @@ package com.bonobostudios.POJOS
 
 import com.google.firebase.firestore.IgnoreExtraProperties
 
+//Clase que servira, para decir que campos quiero obtener de una coleccion de firestore
+//en caso uno de esos campos este vacio se mostrara el valor por defecto
+
 @IgnoreExtraProperties
 data class paciente(
     val nombre:String ="N/A",
