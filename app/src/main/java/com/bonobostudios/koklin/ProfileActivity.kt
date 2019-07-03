@@ -9,7 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_profile.*
 import java.util.*
 
-
+//Declaración de variables 
 private var name = ""
 private var email=""
 class ProfileActivity : AppCompatActivity() {
@@ -19,6 +19,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         var us=FirebaseAuth.getInstance().currentUser?.uid
+        //Obtención de datos del usuario 
         var datos= rootRef.collection("users").document(us!!)
         datos.get().addOnSuccessListener {document->
             if(document!=null){
@@ -39,6 +40,7 @@ class ProfileActivity : AppCompatActivity() {
 
 
         }
+        //Añadir funcion para SignOut al boton correspondiente 
         btn_sign_out.setOnClickListener{
             AuthUI.getInstance()
                 .signOut(this)
@@ -49,7 +51,8 @@ class ProfileActivity : AppCompatActivity() {
                     finish()
                 }
         }
-
+        
+        //Funcion para regresar a la pantalla principal 
         MyProfileView.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
