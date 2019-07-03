@@ -33,11 +33,17 @@ class EvPatientsActivity : AppCompatActivity(),EvaluacionAdapter.OnEvaluacionSel
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ev_patients)
 
+        //Obtenemos el id del paciente que viene de otra actividad
+
         val elIntent = intent
         paciente= elIntent.getStringExtra("LAREFERENCIA")
 
+        // hacemos una query en la cual obtendremos las evaluacion que le pertenecen a ese paciente
         query=rootRef.collection("evaluaciones ").whereEqualTo("autor", paciente)
+
+        //creamos un objeto adapter de tipo EvaluacionAdapter
         adapter = object : EvaluacionAdapter(query, this@EvPatientsActivity) {
+
             override fun onDataChanged() {
                 if (itemCount == 0) {
                     rvResultados.visibility = View.GONE
@@ -74,7 +80,7 @@ class EvPatientsActivity : AppCompatActivity(),EvaluacionAdapter.OnEvaluacionSel
     public override fun onStart() {
         super.onStart()
 
-        // Start listening for Firestore updates
+        // Escuchamos cambios en la bd de firestore
         adapter.startListening()
 
 
@@ -83,7 +89,8 @@ class EvPatientsActivity : AppCompatActivity(),EvaluacionAdapter.OnEvaluacionSel
     public override fun onStop() {
         super.onStop()
         adapter.stopListening()
-        //adapter2.stopListening()
+        // dejamos de escuchar cambios en la bd de firestore
+
     }
 
 

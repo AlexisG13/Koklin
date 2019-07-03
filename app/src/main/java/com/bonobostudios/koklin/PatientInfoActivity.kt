@@ -41,7 +41,7 @@ class PatientInfoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_patient_info)
 
 
-
+//Al momento de dar aceptar obtenemos los valor de los edit text que guardaremos en la base de datos
        BtnAceptar.setOnClickListener{
            var opcion= rgLayout.checkedRadioButtonId
 
@@ -60,7 +60,7 @@ class PatientInfoActivity : AppCompatActivity() {
                aux="F"
            }
 
-
+//Creamos un hashmap para preparar ese variable a ser enviada a firestore
 
             val pacient = hashMapOf(
                 "nombre" to nombre,
@@ -70,7 +70,7 @@ class PatientInfoActivity : AppCompatActivity() {
                 "fecha" to date
 
             )
-
+//Se guarda en en firestore la info de paciente
             db.collection("pacientes ").add(pacient)
 
 
