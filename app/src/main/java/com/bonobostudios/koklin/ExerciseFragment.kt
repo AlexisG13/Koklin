@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.exercise_fragment.*
 
 class ExerciseFragment : Fragment(){
 
-    //var mp: MediaPlayer? = null
+    //Declaración de variables
     var intentos = 3
     var nPreguntas = 0
     var flagSound = 0
@@ -32,6 +32,7 @@ class ExerciseFragment : Fragment(){
     val db = FirebaseFirestore.getInstance()
     lateinit var sonido : String
 
+    //Obtención del sonido a reproducir al crear el fragmento
     companion object{
         fun newInstance(sonido : String) : ExerciseFragment{
                 val newFragment = ExerciseFragment()
@@ -40,6 +41,7 @@ class ExerciseFragment : Fragment(){
         }
     }
 
+    //Obteniendo las vistas, mediaplayer y el sonido a reproducir
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.exercise_fragment,container,false)
@@ -51,12 +53,14 @@ class ExerciseFragment : Fragment(){
         return view
     }
 
+    //Reproducir el sonido al volver al app
     override fun onResume() {
         super.onResume()
         mp.start()
         flagSound=1
     }
 
+    //Obteniendo todas las vistas y añadiendo ClickListener al boton
     private fun bind(view:View){
         resp1 = view.findViewById(R.id.respuesta1)
         resp2 = view.findViewById(R.id.respuesta2)
@@ -64,11 +68,13 @@ class ExerciseFragment : Fragment(){
         ptText = view.findViewById(R.id.PreguntaID)
         btn = view.findViewById(R.id.btn_play)
         btn.isEnabled=false
+        //Al completar el sonido activar el boton, si no hay intentos desactivarlo
         mp?.setOnCompletionListener {
             btn.isEnabled=true
             flagSound=0
             if(intentos==0) btn.isEnabled=false
         }
+        //Verificar si hay intentos y reproducir el sonido si hay, restar el numero de intentos.
         btn.setOnClickListener{
             if(intentos>=1){
                 btn.isEnabled=false
@@ -82,11 +88,13 @@ class ExerciseFragment : Fragment(){
         }
     }
 
+    //Función para obtener la pregunta y respuestas del sonido a reproducir en la BD
     private fun ReadAllQuestions() {
                         val pReference = db.collection("sounds").document(sonido)
                         ReadAllAnswers(pReference, 1)
     }
 
+    //Funcion encargada de cargar las respuestas y preguntas a las vistas 
     private fun ReadAllAnswers(reference: DocumentReference, pActual: Int) {
         reference.get().addOnSuccessListener { document ->
             val pregunta = document.get("pregunta").toString()
@@ -113,19 +121,23 @@ class ExerciseFragment : Fragment(){
         }
     }
 
+    //Función encargada de ver la respuesta que se eligio y verificar si ya se termino el test,en caso de que si ingresarlo
+    // a la BD
     private fun loadThings(context : TextView, respuesta:String, esCorrecta:String, pActual: Int){
         context.setText(respuesta)
         context.setOnClickListener {
-            //var intentosDeX = intentos
+            //Si la respuesta es correcta sumar 1 y cambiar el color.
             if (esCorrecta == "true") {
                 xxx.nPreguntas+=1
                 context.setBackgroundColor(Color.argb(255, 41, 181, 48))
             } else {
                 context.setBackgroundColor(Color.argb(255, 181, 41, 48))
             }
+            //Verificar cuantas preguntas se han hecho,si son 10 terminar la evaluación e insertarla a la BD
             Handler().postDelayed({
                 xxx.nActual+=1
                 if(xxx.nActual==10){
+                    //Verificar si el MediaPlayer estaba reproduciendo algo
                     if(flagSound==1) mp.stop()
                     mp.reset()
                     mp.release()
@@ -133,6 +145,7 @@ class ExerciseFragment : Fragment(){
                     xxx.insertEva()
                 }
                 else  {
+                    //Verificar si el MediaPlayer estaba reproduciendo algo
                     if (flagSound==1) mp.stop()
                     mp.reset()
                     mp.release()
