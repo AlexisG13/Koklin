@@ -15,21 +15,21 @@ import java.util.*
 
 class LoginActivity : AppCompatActivity() {
 
+    //Declaración de variables : BD , autenticación y REQUEST_CODE
     val db = FirebaseFirestore.getInstance()
     private val REQUEST_CODE = 2019
     val auth = FirebaseAuth.getInstance()
-
     lateinit var providers : List<AuthUI.IdpConfig>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
+        //Añadiendo los proveedores para autenticación : Email y Google
         providers = Arrays.asList(
             AuthUI.IdpConfig.EmailBuilder().build(),
             AuthUI.IdpConfig.GoogleBuilder().build()
         )
-
+        //Verificar si ya hay un usuario logeado
         if(auth.currentUser==null){
             showSignInOptions()
         }
@@ -37,7 +37,8 @@ class LoginActivity : AppCompatActivity() {
         startActivity(mIntent)}
 
     }
-
+    
+    //Mostrar las opciones para logearse 
     fun showSignInOptions(){
         startActivityForResult(
             AuthUI.getInstance()
@@ -47,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
                 .build(),REQUEST_CODE)
     }
 
+    //Funcion para verificar log-in del usuario y obtener su instancia
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == REQUEST_CODE){
@@ -59,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
+    //Funcion para verificar si es primera vez que entra el usuario, si es asi crear su documento en la BD
     fun userExists(user: FirebaseUser){
         var mIntent = Intent(this,MainActivity::class.java)
         val docIdRef = db.collection("users").document(user.uid)
