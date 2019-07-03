@@ -14,6 +14,7 @@ private var malas=0
 
 class EvDetailActivity : AppCompatActivity() {
 
+    //Declaración de la BD
     val db = FirebaseFirestore.getInstance()
 
 
@@ -22,18 +23,20 @@ class EvDetailActivity : AppCompatActivity() {
         setContentView(R.layout.respuestas_activity)
 
         val intent= intent
-        //var usuario = intent.getStringExtra("USER_ID")
+        //Obtener el id de la evaluación al iniciar la actividad
         val paciente = intent.getStringExtra("EVALUACION_ID")
-
+        
+        //Boton para regresar a la pantalla principal 
         BtnAceptarResultados.setOnClickListener {
             val intentE  = Intent(this@EvDetailActivity,MainActivity::class.java)
             startActivity(intentE)
             finish()
         }
-
+        //Lectura de la evaluacion 
         read(paciente)
     }
-
+       
+    //Función para obtener los detalles de la evaluación y del paciente que sean necesarios. 
     fun read(id:String){
         val datos = db.collection("evaluaciones ").document(id)
         datos.get().addOnSuccessListener {document->
